@@ -1,13 +1,6 @@
 import 'dotenv/config';
 import { PrismaMariaDb } from '@prisma/adapter-mariadb';
-import {
-  Currency,
-  ListingStatus,
-  ListingType,
-  PrismaClient,
-  SteeringWheel,
-  UserRole,
-} from '@prisma/client';
+import { Currency, ListingStatus, ListingType, PrismaClient } from '@prisma/client';
 import { autoParts } from './seed-data/auto-parts';
 import { blogPosts } from './seed-data/blog-posts';
 import { features, interiorColors, interiorMaterials, stickers } from './seed-data/features-stickers';
@@ -61,6 +54,31 @@ const ALLOWED_CATEGORY_SLUGS = ['cars', 'custom-vehicles', 'motorcycles'] as con
 const motorcycleBrands = new Set(['Harley-Davidson', 'Yamaha', 'Kawasaki', 'Ducati', 'KTM']);
 const customVehicleBrands = new Set(['MAN', 'Scania', 'DAF', 'Iveco', 'Isuzu', 'GAZ', 'Volvo']);
 
+type UserRole = 'USER' | 'DEALER' | 'ADMIN';
+type SteeringWheel = 'LEFT' | 'RIGHT';
+type IdRecord = { id: number };
+type SlugRecord = { id: number; slug: string };
+type ModelRecord = {
+  id: number;
+  nameEn: string;
+  nameRu: string;
+  manufacturer: { nameEn: string; nameRu: string };
+};
+
+type SeedContext = {
+  categories: SlugRecord[];
+  bodyTypes: IdRecord[];
+  fuelTypes: IdRecord[];
+  transmissions: IdRecord[];
+  driveTypes: IdRecord[];
+  colors: IdRecord[];
+  features: IdRecord[];
+  stickers: IdRecord[];
+  models: ModelRecord[];
+  cities: IdRecord[];
+  users: { id: number; role: UserRole }[];
+};
+
 async function clearTransactionalData() {
   console.log('  Clearing existing transactional data...');
   await prisma.auctionBid.deleteMany();
@@ -80,7 +98,19 @@ async function clearTransactionalData() {
   await prisma.user.deleteMany({ where: { email: { not: 'admin@autoshop.com' } } });
 }
 
-async function seedReferenceData() {
+async function seedReferenceData(): Promise<
+  Pick<
+    SeedContext,
+    | 'categories'
+    | 'bodyTypes'
+    | 'fuelTypes'
+    | 'transmissions'
+    | 'driveTypes'
+    | 'colors'
+    | 'features'
+    | 'stickers'
+  >
+> {
   await prisma.vehicleCategory.deleteMany({
     where: { slug: { notIn: [...ALLOWED_CATEGORY_SLUGS] } },
   });
@@ -181,7 +211,7 @@ async function seedReferenceData() {
   };
 }
 
-async function seedManufacturersAndModels() {
+async function seedManufacturersAndModels(): Promise<ModelRecord[]> {
   const expanded = expandManufacturersWithVariants(baseManufacturers, 2);
   let modelCount = 0;
 
@@ -202,12 +232,12 @@ async function seedManufacturersAndModels() {
     }
   }
 
-  const allModels = await prisma.model.findMany({
+  const models: ModelRecord[] = await prisma.model.findMany({
     include: { manufacturer: true },
   });
 
   console.log(`  ✓ ${expanded.length} manufacturers, ${modelCount} models`);
-  return allModels;
+  return models;
 }
 
 async function seedUsersAndDealers() {
@@ -225,7 +255,7 @@ async function seedUsersAndDealers() {
     },
   });
 
-  const privateUsers = [];
+  const privateUsers: Array<{ id: number; role: UserRole }> = [];
   for (let i = 0; i < PRIVATE_USER_COUNT; i++) {
     const user = await prisma.user.create({
       data: {
@@ -242,8 +272,8 @@ async function seedUsersAndDealers() {
     privateUsers.push(user);
   }
 
-  const dealerUsers = [];
-  const dealers = [];
+  const dealerUsers: Array<{ id: number; role: UserRole }> = [];
+  const dealers: Array<{ id: number }> = [];
   for (let i = 0; i < DEALER_COUNT; i++) {
     const seed = dealersSeed[i];
     const user = await prisma.user.create({
@@ -286,26 +316,12 @@ async function seedUsersAndDealers() {
   return { admin, privateUsers, dealerUsers, dealers, allUsers };
 }
 
-type SeedContext = {
-  categories: Awaited<ReturnType<typeof seedReferenceData>>['categories'];
-  bodyTypes: Awaited<ReturnType<typeof seedReferenceData>>['bodyTypes'];
-  fuelTypes: Awaited<ReturnType<typeof seedReferenceData>>['fuelTypes'];
-  transmissions: Awaited<ReturnType<typeof seedReferenceData>>['transmissions'];
-  driveTypes: Awaited<ReturnType<typeof seedReferenceData>>['driveTypes'];
-  colors: Awaited<ReturnType<typeof seedReferenceData>>['colors'];
-  features: Awaited<ReturnType<typeof seedReferenceData>>['features'];
-  stickers: Awaited<ReturnType<typeof seedReferenceData>>['stickers'];
-  models: Awaited<ReturnType<typeof seedManufacturersAndModels>>;
-  cities: { id: number }[];
-  users: { id: number; role: UserRole }[];
-};
-
 function resolveCategoryId(
   model: SeedContext['models'][number],
   categories: SeedContext['categories'],
 ): number {
   const bySlug = (slug: (typeof ALLOWED_CATEGORY_SLUGS)[number]) =>
-    categories.find((c) => c.slug === slug)?.id ?? categories[0].id;
+    categories.find((category) => category.slug === slug)?.id ?? categories[0].id;
 
   const brand = model.manufacturer.nameEn;
 
@@ -344,8 +360,8 @@ function buildListingData(ctx: SeedContext, index: number) {
   const steeringWheel: SteeringWheel = Math.random() < 0.92 ? 'LEFT' : 'RIGHT';
   const status: ListingStatus = Math.random() < 0.97 ? 'ACTIVE' : pickRandom(['SOLD', 'MODERATION', 'DRAFT']);
   const createdAt = daysAgo(randomInt(0, 540));
-  const featureIds = pickRandomMany(ctx.features, 4, 14).map((f) => f.id);
-  const stickerIds = pickRandomMany(ctx.stickers, 0, 3).map((s) => s.id);
+  const featureIds = pickRandomMany(ctx.features, 4, 14).map((feature) => feature.id);
+  const stickerIds = pickRandomMany(ctx.stickers, 0, 3).map((sticker) => sticker.id);
   const imageCount = randomInt(2, 6);
   const descIdx = index % listingDescriptionsEn.length;
   const interiorColor = pickRandom(interiorColors);
@@ -494,7 +510,7 @@ async function seedReviewsAndFavorites(
   dealers: { id: number }[],
   privateUsers: { id: number }[],
 ) {
-  const listings = await prisma.listing.findMany({
+  const listings: { id: number }[] = await prisma.listing.findMany({
     select: { id: true },
     take: 500,
     orderBy: { id: 'asc' },
@@ -621,7 +637,7 @@ async function main() {
   console.log('\nUsers & dealers:');
   const { privateUsers, dealers, allUsers } = await seedUsersAndDealers();
 
-  const cities = await prisma.city.findMany({ select: { id: true } });
+  const cities: IdRecord[] = await prisma.city.findMany({ select: { id: true } });
 
   const ctx: SeedContext = {
     ...ref,
