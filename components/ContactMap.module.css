@@ -1,0 +1,43 @@
+.wrap {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #e8edf3;
+  border-radius: 1.1rem;
+  background: #eef2f6;
+}
+
+.frame {
+  display: block;
+  width: 100%;
+  height: 380px;
+  border: 0;
+}
+
+.openMaps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 1rem;
+  padding: 0.85rem 1.1rem;
+  border-top: 1px solid #e8edf3;
+  background: #ffffff;
+  color: #ea580c;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.openMaps span {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.openMaps:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .frame {
+    height: 260px;
+  }
+}

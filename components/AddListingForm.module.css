@@ -1,0 +1,879 @@
+.page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.sidebar {
+  position: sticky;
+  top: 88px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.savedBtn {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  border-radius: 12px;
+  background: #312e49;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.stepperCard,
+.previewCard {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  padding: 20px 16px;
+}
+
+.stepper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.stepItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 0;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+}
+
+.stepItem:hover .stepLabel {
+  color: #111827;
+}
+
+.stepIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.stepCircle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepCircleActive {
+  border-color: #111827;
+  border-width: 3px;
+}
+
+.stepCircleDone {
+  border-color: #22c55e;
+  background: #22c55e;
+  color: #fff;
+}
+
+.stepLine {
+  width: 2px;
+  height: 28px;
+  background: #e5e7eb;
+  margin: 4px 0;
+}
+
+.stepLabel {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.4;
+  padding-top: 1px;
+}
+
+.stepLabelActive {
+  color: #111827;
+  font-weight: 600;
+}
+
+.previewImage {
+  height: 140px;
+  border-radius: 12px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.previewImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.previewSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.previewSkeleton span {
+  height: 10px;
+  border-radius: 6px;
+  background: #e5e7eb;
+}
+
+.previewSkeleton span:nth-child(1) {
+  width: 85%;
+}
+
+.previewSkeleton span:nth-child(2) {
+  width: 60%;
+}
+
+.previewSpecs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.previewSpecRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.previewSpecBar {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: #e5e7eb;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.topBar {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  padding: 20px;
+}
+
+.categoryTabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.categoryTab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: #6b7280;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.categoryTabActive {
+  color: #f97316;
+  border-bottom-color: #f97316;
+}
+
+.listingTypeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.radioGroup {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: #374151;
+  cursor: pointer;
+}
+
+.radioLabel input {
+  accent-color: #f97316;
+  width: 18px;
+  height: 18px;
+}
+
+.loanBtn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #00aeef;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.vinCard {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.vinHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.vinTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.vinBadge {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: #22c55e;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.vinDesc {
+  font-size: 14px;
+  color: #4b5563;
+  margin-bottom: 14px;
+}
+
+.vinRow {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.vinInputWrap {
+  flex: 1;
+  position: relative;
+}
+
+.vinInput {
+  width: 100%;
+  padding: 14px 44px 14px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  font-size: 15px;
+  background: #fff;
+}
+
+.vinAddBtn {
+  padding: 0 28px;
+  border: none;
+  border-radius: 12px;
+  background: #fda4af;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.vinHelp {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.sectionCard {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  border: none;
+  background: #fff;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sectionHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.sectionHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.progressRing {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+}
+
+.progressRingDone {
+  border-color: #22c55e;
+  background: #22c55e;
+}
+
+.sectionBody {
+  padding: 0 20px 20px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding-top: 16px;
+}
+
+.formGrid3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  padding-top: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fieldFull {
+  grid-column: 1 / -1;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.required {
+  color: #ef4444;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 15px;
+  background: #fff;
+  color: #111827;
+}
+
+.textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.toggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  font-size: 15px;
+  color: #374151;
+}
+
+.toggle {
+  width: 48px;
+  height: 28px;
+  border-radius: 999px;
+  border: none;
+  background: #e5e7eb;
+  position: relative;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.toggleOn {
+  background: #f97316;
+  box-shadow: inset 0 0 0 1px rgba(234, 88, 12, 0.15);
+}
+
+.toggleThumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.18);
+  transition: transform 0.2s ease;
+}
+
+.toggleOn .toggleThumb {
+  transform: translateX(20px);
+}
+
+.segmentGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.segmentBtn {
+  padding: 10px 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+}
+
+.segmentBtnActive {
+  border-color: #f97316;
+  color: #f97316;
+  background: #fff7ed;
+}
+
+.airbagGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.airbagBtn {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.airbagBtnActive {
+  border-color: #f97316;
+  color: #f97316;
+  background: #fff7ed;
+}
+
+.colorGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.colorBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.colorBtnActive {
+  border-color: #f97316;
+  background: #fff7ed;
+}
+
+.colorSwatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.featureGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.featureChip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.featureChipActive {
+  border-color: #f97316;
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+.langTabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.langTab {
+  padding: 8px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.langTabActive {
+  border-color: #111827;
+  font-weight: 600;
+}
+
+.charCount {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.uploadZone {
+  border: 2px dashed #86efac;
+  border-radius: 14px;
+  background: #f0fdf4;
+  padding: 32px 20px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.uploadZone input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.uploadTitle {
+  color: #16a34a;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.uploadHint {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.photoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.photoThumb {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.photoThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photoRemove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.priceNote {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.priceInputWrap {
+  display: flex;
+  gap: 8px;
+}
+
+.currencyBtn {
+  padding: 0 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.promoSection {
+  background: #eff6ff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 8px;
+}
+
+.promoTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #111827;
+}
+
+.promoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.promoCard {
+  background: #fff;
+  border: 2px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px;
+  cursor: pointer;
+  position: relative;
+}
+
+.promoCardActive {
+  border-color: #f97316;
+}
+
+.promoCard input {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+
+.promoName {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.promoPrice {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+.serviceRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.serviceRow:last-child {
+  border-bottom: none;
+}
+
+.serviceLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+}
+
+.stickersBox {
+  border: 1px solid #fed7aa;
+  border-radius: 14px;
+  padding: 16px;
+  background: #fffbeb;
+  margin-top: 16px;
+}
+
+.stickerGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.stickerBtn {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.stickerBtnActive {
+  border-color: #f97316;
+  background: #fff7ed;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  padding: 20px;
+  margin-top: 8px;
+}
+
+.saveBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #374151;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.saveHint {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+.publishBtn {
+  padding: 14px 48px;
+  border: none;
+  border-radius: 12px;
+  background: #f97316;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.publishBtn:disabled,
+.saveBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.errorBanner {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 14px;
+  border: 1px solid #fecaca;
+}
+
+.loading {
+  padding: 48px;
+  text-align: center;
+  color: #6b7280;
+}
+
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+
+  .promoGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .formGrid,
+  .formGrid3 {
+    grid-template-columns: 1fr;
+  }
+
+  .vinRow {
+    flex-direction: column;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .publishBtn {
+    width: 100%;
+  }
+}

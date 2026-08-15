@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-label="Car photo placeholder">
+  <rect width="1200" height="750" fill="#e8edf3"/>
+  <g fill="none" stroke="#94a3b8" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" transform="translate(250 230)">
+    <path d="M80 250h540"/>
+    <path d="M120 250c20-90 70-150 170-150h160c90 0 140 40 190 150"/>
+    <path d="M290 100h140c40 0 70 20 95 70H250c20-35 40-70 40-70z"/>
+    <circle cx="230" cy="250" r="48" fill="#e8edf3"/>
+    <circle cx="520" cy="250" r="48" fill="#e8edf3"/>
+  </g>
+</svg>

@@ -1,0 +1,199 @@
+.section {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  min-height: 220px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.darkCard {
+  background: #2d3140;
+  color: #ffffff;
+}
+
+.lightCard {
+  background: #e5d8c5;
+  color: #1f2937;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 25rem;
+  min-height: 6.5rem;
+}
+
+.title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.description {
+  margin-top: 0.625rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.92;
+}
+
+.formRow {
+  position: relative;
+  z-index: 2;
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+}
+
+.input {
+  flex: 1 1 220px;
+  min-width: 0;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0.75rem;
+  padding: 0 1rem;
+  background: rgba(255, 255, 255, 0.96);
+  color: #111827;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.button {
+  height: 48px;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0 1.35rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.16s ease, opacity 0.16s ease;
+  white-space: nowrap;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.orangeButton {
+  background: #ff5a0a;
+  color: #ffffff;
+}
+
+.darkButton {
+  background: #2d3140;
+  color: #ffffff;
+}
+
+.brands {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+}
+
+.brand {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.brandGreen {
+  color: #34d399;
+}
+
+.brandMono {
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.28);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+}
+
+.carImage {
+  position: absolute;
+  right: 1rem;
+  bottom: 0;
+  width: min(38%, 220px);
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+@media (max-width: 1024px) {
+  .card {
+    min-height: 200px;
+    padding: 1.5rem;
+  }
+
+  .content {
+    min-height: 6rem;
+  }
+
+  .title {
+    font-size: 1.55rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    grid-template-columns: 1fr;
+  }
+
+  .carImage {
+    width: min(34%, 180px);
+  }
+}
+
+@media (max-width: 560px) {
+  .card {
+    min-height: 0;
+    padding: 1.25rem;
+  }
+
+  .content {
+    min-height: 0;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .description {
+    font-size: 0.875rem;
+  }
+
+  .formRow {
+    gap: 0.75rem;
+  }
+
+  .input,
+  .button {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .carImage {
+    position: static;
+    width: min(100%, 220px);
+    margin: 1rem 0 0 auto;
+    display: block;
+  }
+}

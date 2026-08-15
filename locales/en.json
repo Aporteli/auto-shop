@@ -1,0 +1,1003 @@
+{
+  "header": {
+    "logo": "AutoShop",
+    "searchPlaceholder": "Search...",
+    "searching": "Searching...",
+    "noSearchResults": "No listings found",
+    "viewAllResults": "View all results",
+    "clearSearch": "Clear search",
+    "add": "Add",
+    "login": "Log in",
+    "logout": "Log out",
+    "accountMenu": "Account menu",
+    "account": {
+      "myListings": "My Listings",
+      "topUpBalance": "Top up balance",
+      "compare": "Compare",
+      "favorites": "Favorites",
+      "editData": "Edit data",
+      "messages": "Messages",
+      "news": "News"
+    },
+    "nav": {
+      "services": "Services",
+      "rent": "Rent",
+      "auction": "Auction",
+      "vinCheck": "VIN Check",
+      "dealers": "Dealers",
+      "newAutoDealerships": "New Auto Dealerships",
+      "autoParts": "Auto Parts",
+      "catalogue": "Catalogue",
+      "blog": "Blog",
+      "priceCalculator": "Price Calculator",
+      "customs": "Customs",
+      "titleTransfer": "Title transfer",
+      "help": "Help",
+      "contacts": "Contacts"
+    }
+  },
+  "accountPages": {
+    "loading": "Loading...",
+    "openListing": "Open",
+    "listingsSubtitle": "Manage the vehicles you have published on AutoShop.",
+    "addListing": "Add listing",
+    "emptyListings": "You have no listings yet.",
+    "balanceSubtitle": "Add funds to promote listings and unlock extra services.",
+    "currentBalance": "Current balance",
+    "chooseAmount": "Choose an amount",
+    "customAmount": "Custom amount",
+    "topUp": "Top up",
+    "topUpSuccess": "Balance updated.",
+    "compareSubtitle": "Compare cars side by side to pick the right one.",
+    "emptyCompare": "You have not added any cars to compare yet.",
+    "browseListings": "Browse listings",
+    "favoritesSubtitle": "Listings you saved for later.",
+    "emptyFavorites": "You have no favorite listings yet.",
+    "profileSubtitle": "Update your name and contact details.",
+    "saveChanges": "Save changes",
+    "saved": "Changes saved.",
+    "saveFailed": "Could not save changes.",
+    "phone": "Phone",
+    "messagesSubtitle": "Conversations with buyers and sellers.",
+    "emptyMessages": "You have no messages yet.",
+    "from": "From",
+    "to": "To",
+    "newsSubtitle": "Latest AutoShop news and buying guides.",
+    "adNotFound": "Ad not found",
+    "limit": "Limit: {{used}}/{{max}}",
+    "getLoan": "Get a loan in 2 mins",
+    "filter": "Filter",
+    "sort": "Sort",
+    "sortNewest": "Newest",
+    "sortOldest": "Oldest",
+    "sortPriceDesc": "Price descending",
+    "sortPriceAsc": "Price ascending",
+    "filterAll": "All",
+    "filterSale": "For sale",
+    "filterRent": "For rent",
+    "tabActive": "Active",
+    "tabExpired": "Expired",
+    "tabDisabled": "Disabled",
+    "tabBlocked": "Blocked"
+  },
+  "accountDashboard": {
+    "balance": "Balance",
+    "topUp": "+ Top up",
+    "userId": "ID: {{id}}",
+    "newListing": "New Listing",
+    "myListings": "My Listings",
+    "wonLots": "Won Lots",
+    "vinCodes": "Purchased VIN codes",
+    "savedCars": "Saved cars",
+    "leasing": "Leasing applications",
+    "compare": "Compare",
+    "subscribe": "Subscribe",
+    "messages": "Messages",
+    "news": "News",
+    "photos360": "360 Photos",
+    "editData": "Edit data",
+    "addCompany": "Add company",
+    "topUpBalance": "Top up balance",
+    "transferMoney": "Transfer money",
+    "cards": "Cards",
+    "transactions": "Transactions",
+    "emptySection": "Nothing here yet."
+  },
+  "footer": {
+    "navigation": {
+      "title": "Navigation",
+      "myPage": "My Page",
+      "vinCheck": "VIN Check",
+      "carService": "Car service",
+      "disassembledCars": "Disassembled cars",
+      "videoTrafficFines": "Video traffic fines",
+      "tbilisiParking": "Tbilisi Parking",
+      "registrationCalculator": "Registration Calculator",
+      "advertisements": "Advertisements"
+    },
+    "help": {
+      "title": "Help",
+      "email": "info@autoshop.com",
+      "contacts": "Contacts",
+      "faq": "FAQ",
+      "sendMessage": "Send a message",
+      "requestCall": "Request a Call",
+      "phone": "+995 32 280 00 45",
+      "anonymousFeedback": "Anonymous feedback"
+    },
+    "categories": {
+      "title": "Categories",
+      "column1": [
+        "Sedan",
+        "Jeep",
+        "Coupe",
+        "Hatchback",
+        "Universal",
+        "Cabriolet",
+        "Pickup",
+        "Minivan",
+        "Limousine",
+        "Crossover"
+      ],
+      "column2": [
+        "Semi-trailer truck",
+        "Truck",
+        "Dump truck",
+        "Agricultural",
+        "Cranes",
+        "Excavators",
+        "Custom machinery",
+        "Trailer",
+        "Loader",
+        "Concrete pump truck",
+        "Road"
+      ],
+      "column3": [
+        "Motorcycle",
+        "Scooter",
+        "Quad bike",
+        "Water transport",
+        "Tricycle",
+        "Buggy",
+        "Snowmobile",
+        "Trailer for boat",
+        "Trailer for motorcycle",
+        "Karting-car"
+      ]
+    },
+    "copyright": "All rights reserved."
+  },
+  "searchModal": {
+    "title": "Search",
+    "placeholder": "Search products...",
+    "popularSearches": "Popular searches:",
+    "tags": {
+      "carParts": "Car Parts",
+      "engineOil": "Engine Oil",
+      "tires": "Tires",
+      "brakes": "Brakes"
+    }
+  },
+  "searchResults": {
+    "title": "Search Results",
+    "subtitle": "Browse vehicles that match your selected filters.",
+    "filtersTitle": "Filters",
+    "category": "Category",
+    "select": "Select",
+    "all": "All",
+    "bodyType": "Body type",
+    "transmission": "Transmission",
+    "driveType": "Drive type",
+    "color": "Color",
+    "listingType": "Listing type",
+    "customs": "Customs status",
+    "applyFilters": "Apply filters",
+    "found": "Found",
+    "loading": "Loading listings...",
+    "noResults": "No listings match your filters.",
+    "priceNegotiable": "Price negotiable",
+    "unknownLocation": "Unknown location",
+    "yearSuffix": "y",
+    "km": "Km",
+    "mi": "Mi",
+    "steeringLeft": "Left",
+    "steeringRight": "Right",
+    "superVipBadge": "S-VIP",
+    "justNow": "Just now",
+    "minutesAgo": "minutes ago",
+    "hoursAgo": "hours ago",
+    "daysAgo": "days ago",
+    "views": "{{count}} Views",
+    "addFavorite": "Add to favorites",
+    "removeFavorite": "Remove from saved cars",
+    "compare": "Compare",
+    "contact": "Contact seller",
+    "hideListing": "Hide listing",
+    "showListing": "Show listing",
+    "customsFee": "Customs",
+    "imageNumber": "Image {{number}}",
+    "listingsCount": "{{count}} Listing",
+    "listingsCountPlural": "{{count}} Listings",
+    "period": "Period",
+    "sort": "Sort",
+    "period1h": "1 hour",
+    "period3h": "3 hours",
+    "period6h": "6 hours",
+    "period12h": "12 hours",
+    "period24h": "24 hours",
+    "periodChip": "Last {{hours}} h",
+    "sortDateDesc": "Order by date desc",
+    "sortDateAsc": "Order by date asc",
+    "sortPriceDesc": "Price descending",
+    "sortPriceAsc": "Price ascending",
+    "sortMileageDesc": "Mileage descending",
+    "sortMileageAsc": "Mileage ascending",
+    "listView": "List view",
+    "gridView": "Grid view",
+    "clearAllFilters": "Clear all filters",
+    "removeFilter": "Remove filter",
+    "priceFromChip": "From {{value}}",
+    "priceToChip": "To {{value}}"
+  },
+  "dealers": {
+    "dealerCount": "{{count}} Dealer",
+    "searchPlaceholder": "Search",
+    "viewMode": "View mode",
+    "gridView": "Grid view",
+    "listView": "List view",
+    "phone": "Phone",
+    "email": "Email",
+    "more": "More",
+    "website": "Website",
+    "viewListings": "View listings",
+    "listingsCount": "{{count}} Listing",
+    "unknownAddress": "Address not specified",
+    "loading": "Loading dealers...",
+    "noResults": "No dealers found."
+  },
+  "homeSliders": {
+    "superVip": "SUPER VIP",
+    "vipPlus": "VIP+"
+  },
+  "listingDetail": {
+    "loading": "Loading listing...",
+    "notFound": "Listing not found.",
+    "backToSearch": "Back to search",
+    "unknownLocation": "Unknown location",
+    "mainSpecifications": "Main Specifications",
+    "specifications": "Specifications",
+    "similarVehicles": "Similar vehicles",
+    "manufacturer": "Manufacturer",
+    "model": "Model",
+    "year": "Year",
+    "category": "Category",
+    "mileage": "Mileage",
+    "fuelType": "Fuel type",
+    "engineVolume": "Engine Volume",
+    "cylinders": "Cylinders",
+    "gearbox": "Gear box type",
+    "driveWheels": "Drive wheels",
+    "doors": "Doors",
+    "thirdRowSeats": "Third row seats",
+    "airbags": "Airbags",
+    "wheel": "Wheel",
+    "left": "Left",
+    "right": "Right",
+    "color": "Color",
+    "interiorColor": "Interior color",
+    "interiorMaterial": "Interior material",
+    "exchange": "Exchange",
+    "techInspection": "Technical inspection",
+    "catalyst": "Catalyst",
+    "description": "Description",
+    "seller": "Seller",
+    "dealer": "Dealer",
+    "call": "Call seller",
+    "views": "views",
+    "listingId": "ID {{id}}",
+    "vin": "VIN",
+    "photos": "{{current}} / {{total}}",
+    "groups": {
+      "comfort": "Comfort",
+      "interior": "Interior",
+      "safety": "Safety",
+      "multimedia": "Multimedia",
+      "other": "Other"
+    }
+  },
+  "searchDashboard": {
+    "forSale": "For sale",
+    "forRent": "For rent",
+    "clearFilters": "Clear Filters",
+    "search": "Search",
+    "resultCount": "111046",
+    "lastSearches": "Last searches",
+    "lastSearchesEmpty": "Your recent searches will appear here",
+    "modeFilters": "Filters",
+    "modeAi": "AutoShop AI",
+    "modeAiBeta": "Beta",
+    "aiPlaceholder": "Describe the car you want… e.g. white Toyota Camry under $15,000 from 2018",
+    "aiSearch": "Search with AI",
+    "aiHint": "Tell us what you’re looking for in plain language.",
+    "aiLoading": "Thinking…",
+    "aiResponseTitle": "AutoShop AI",
+    "aiResponseClose": "Close",
+    "aiMatchedListings": "Matched listings",
+    "aiViewListing": "View listing",
+    "aiErrorGeneric": "Could not reach the AI service. Please try again.",
+    "categories": {
+      "cars": "Cars",
+      "customVehicles": "Custom Vehicles",
+      "motorcycles": "Motorcycles"
+    },
+    "filters": {
+      "manufacturer": "Manufacturer",
+      "model": "Model",
+      "location": "Location",
+      "year": "Year",
+      "price": "Price",
+      "fuel": "Fuel",
+      "customsCleared": "Customs cleared",
+      "beforeCustoms": "Before customs",
+      "additionalFilters": "Additional filters"
+    },
+    "toggles": {
+      "withVin": "Listings with VIN",
+      "hideNegotiable": "Hide Price Negotiable",
+      "with360": "With a 360° Photo"
+    }
+  },
+  "additionalFiltersModal": {
+    "title": "Additional filters",
+    "close": "Close",
+    "apply": "Apply filters",
+    "clear": "Clear",
+    "all": "All",
+    "from": "From",
+    "to": "To",
+    "yes": "Yes",
+    "no": "No",
+    "seeMore": "See more",
+    "seeLess": "See less",
+    "otherColors": "Other colors",
+    "otherStickers": "Other stickers",
+    "multiSelectHint": "You can select several",
+    "vehicleInformation": "Vehicle information",
+    "engine": "Engine",
+    "mileage": "Mileage",
+    "category": "Category",
+    "gearbox": "Gear box type",
+    "wheel": "Wheel",
+    "left": "Left",
+    "right": "Right",
+    "driveWheels": "Drive wheels",
+    "driveOptions": {
+      "front": "Front",
+      "rear": "Rear",
+      "fourByFour": "4x4"
+    },
+    "doors": "Number of doors",
+    "doorOptions": {
+      "2-3": "2/3",
+      "4-5": "4/5",
+      "5+": ">5"
+    },
+    "thirdRowSeats": "Third row seats",
+    "isNew": "New",
+    "techInspection": "Tech. inspection",
+    "catalyst": "Catalyst",
+    "additionalOptions": "Additional options",
+    "carColor": "Car color",
+    "interiorMaterialColor": "Interior material/color",
+    "interiorMaterial": "Interior material",
+    "interiorColor": "Interior color",
+    "interiorMaterials": {
+      "fabric": "Fabric",
+      "leather": "Leather",
+      "artificialLeather": "Artificial leather",
+      "combined": "Combined",
+      "alcantara": "Alcantara"
+    },
+    "interiorColors": {
+      "black": "Black",
+      "white": "White",
+      "grey": "Grey",
+      "brown": "Brown",
+      "beige": "Beige",
+      "red": "Red",
+      "green": "Green",
+      "yellow": "Yellow",
+      "orange": "Orange",
+      "purple": "Purple",
+      "burgundy": "Burgundy"
+    },
+    "listingInformation": "Information about listing",
+    "applicant": "Applicant",
+    "applicants": {
+      "private": "Private person",
+      "dealer": "Dealer",
+      "showroom": "Car showroom"
+    },
+    "publicationDate": "Publication date",
+    "recentlyAdded": "Recently added listings",
+    "publicationHours": {
+      "1": "1 hour",
+      "3": "3 hours",
+      "6": "6 hours",
+      "12": "12 hours",
+      "24": "24 hours"
+    },
+    "exchange": "Exchange",
+    "auction": "Auction",
+    "withVideo": "Listings with video",
+    "stickers": "Stickers",
+    "features": {
+      "conditioner": "Conditioner",
+      "climateControl": "Climate control",
+      "rims": "Rims",
+      "electricWindows": "Electric windows",
+      "rearViewCamera": "Rear view camera",
+      "boardComputer": "Board computer",
+      "seatHeater": "Seat heater",
+      "hydraulics": "Hydraulics",
+      "turbo": "Turbo",
+      "navigation": "Navigation system",
+      "parkingControl": "Parking control",
+      "adaptedPsn": "Adapted to PSN",
+      "startStop": "Start-stop system",
+      "hatch": "Hatch",
+      "cruiseControl": "Cruise control",
+      "multiSteeringWheel": "Multi steering wheel",
+      "alarm": "Alarm"
+    }
+  },
+  "languages": {
+    "english": "English",
+    "russian": "Russian"
+  },
+  "currencies": {
+    "dollar": "Dollar ($)",
+    "euro": "Euro (€)"
+  },
+  "rent": {
+    "title": "Rent",
+    "description": "Browse vehicles available for short-term and long-term rent.",
+    "comingSoon": "Rental listings will appear here soon."
+  },
+  "auction": {
+    "title": "Auction",
+    "description": "Discover cars up for auction and place your bids.",
+    "comingSoon": "Auction listings will appear here soon."
+  },
+  "servicePromo": {
+    "vin": {
+      "title": "Search by VIN",
+      "description": "Through this service, you will get detailed information about the vehicle.",
+      "placeholder": "Enter VIN",
+      "button": "Search"
+    },
+    "inspection": {
+      "title": "Check the technical inspection date",
+      "description": "Find out exactly when your car is due for technical inspection.",
+      "placeholder": "License plate number",
+      "button": "Check",
+      "imageAlt": "Car illustration"
+    }
+  },
+  "categoryCards": {
+    "seeAll": "See All",
+    "customVehicles": {
+      "title": "Custom Vehicles",
+      "imageAlt": "Custom vehicle",
+      "column1": [
+        "Semi-trailer truck",
+        "Dump truck",
+        "Cranes",
+        "Custom machinery",
+        "Loader"
+      ],
+      "column2": [
+        "Truck",
+        "Agricultural",
+        "Excavators",
+        "Trailer",
+        "Concrete pump truck"
+      ]
+    },
+    "motorcycles": {
+      "title": "Motorcycles",
+      "imageAlt": "Motorcycle",
+      "column1": [
+        "Motorcycle",
+        "Quad bike",
+        "Tricycle",
+        "Snowmobile",
+        "Trailer for motorcycle"
+      ],
+      "column2": [
+        "Scooter",
+        "Water transport",
+        "Buggy",
+        "Trailer for boat",
+        "Karting-car"
+      ]
+    }
+  },
+  "stickerSlider": {
+    "title": "Search for a vehicle with a sticker",
+    "previous": "Previous stickers",
+    "next": "Next stickers",
+    "listingsCount": "{{count}} Listing",
+    "items": {
+      "urgent": {
+        "label": "Urgently",
+        "count": "319 Listing"
+      },
+      "perfect": {
+        "label": "Perfect condition",
+        "count": "130 Listing"
+      },
+      "undamaged": {
+        "label": "Undamaged",
+        "count": "116 Listing"
+      },
+      "history": {
+        "label": "Clean History",
+        "count": "86 Listing"
+      },
+      "usa": {
+        "label": "From USA",
+        "count": "60 Listing"
+      },
+      "center": {
+        "label": "Center Car",
+        "count": "56 Listing"
+      },
+      "eco": {
+        "label": "Low Consumption",
+        "count": "55 Listing"
+      },
+      "hybrid": {
+        "label": "Hybrid",
+        "count": "73 Listing"
+      },
+      "certified": {
+        "label": "Certified",
+        "count": "41 Listing"
+      },
+      "family": {
+        "label": "Family Car",
+        "count": "98 Listing"
+      }
+    }
+  },
+  "marketplaceOverview": {
+    "all": "All",
+    "listing": "Listing",
+    "favorite": "Save listing",
+    "dealersEmpty": "No dealers yet.",
+    "recent": {
+      "title": "Recently Added",
+      "empty": "No recent listings."
+    },
+    "internationalDealers": {
+      "title": "International Dealers"
+    },
+    "localDealers": {
+      "title": "Local Dealers"
+    }
+  },
+  "blogSection": {
+    "title": "Blog",
+    "seeAll": "See All"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Guides, market insights, and practical tips for buying and owning vehicles.",
+    "readMore": "Read article",
+    "backToBlog": "Back to blog",
+    "minRead": "{{minutes}} min read",
+    "empty": "No articles published yet."
+  },
+  "catalogue": {
+    "kicker": "Vehicle directory",
+    "title": "Catalogue",
+    "subtitle": "Browse every brand in the shop, refine the catalogue filters, and jump straight into matching listings.",
+    "manufacturer": "Manufacturer",
+    "model": "Model",
+    "yearFrom": "Year from",
+    "yearTo": "Year to",
+    "transmission": "Transmission",
+    "fuelType": "Fuel type",
+    "engineFrom": "Engine from",
+    "engineTo": "Engine to",
+    "driveWheels": "Drive wheels",
+    "location": "Location",
+    "category": "Category",
+    "bodyType": "Body type",
+    "price": "Price",
+    "priceFrom": "Price from",
+    "mileage": "Mileage",
+    "searching": "Counting...",
+    "results": "{{count}} results",
+    "popularBrands": "Popular brands",
+    "seeAll": "See all",
+    "seeLess": "See less",
+    "jumpToLetter": "Jump to letter",
+    "all": "All"
+  },
+  "autoParts": {
+    "kicker": "Car systems",
+    "title": "Auto parts",
+    "subtitle": "What the main parts of a car do, and when they usually need replacing.",
+    "intro": "Use this page to learn the common parts found on most passenger cars. Filter by system, search in English or Russian, and open a part for a short explanation. This is an educational catalogue, not a shop listing.",
+    "searchPlaceholder": "Search parts...",
+    "sort": "Sort",
+    "sortNameAsc": "Name A–Z",
+    "sortNameDesc": "Name Z–A",
+    "sortCategory": "By system",
+    "category": "System",
+    "all": "All systems",
+    "results": "{{count}} parts",
+    "partsStat": "parts in the guide",
+    "systemsStat": "vehicle systems",
+    "empty": "No parts match this search.",
+    "learnMore": "Read more",
+    "whatItDoes": "What it does",
+    "whenToReplace": "When to replace",
+    "related": "Related parts in this system",
+    "backToList": "Back to auto parts"
+  },
+  "priceCalculator": {
+    "title": "Price calculator",
+    "subtitle": "Fill in the parameters correctly to receive a more accurate preliminary estimate",
+    "manufacturer": "Manufacturer",
+    "model": "Model",
+    "year": "Year",
+    "category": "Category",
+    "engine": "Engine",
+    "driveWheels": "Drive wheels",
+    "calculate": "Calculate",
+    "calculating": "Calculating...",
+    "required": "Select a manufacturer and model to calculate a price.",
+    "failed": "Could not calculate a price. Please try again.",
+    "noResults": "No similar published listings were found for these parameters.",
+    "estimateLabel": "Estimated market price",
+    "rangeLabel": "Typical range",
+    "basedOn": "Based on {{count}} similar listings ({{match}} match)",
+    "match": {
+      "exact": "close",
+      "close": "similar",
+      "broad": "broader"
+    },
+    "viewSimilar": "View similar listings",
+    "howTitle": "How AutoShop vehicle valuation works",
+    "howBody": "Vehicle valuation on AutoShop is based on data analysis. The system collects information from published listings to calculate the average market price. An AutoShop valuation is an algorithmic market price based on similar listings."
+  },
+  "customsCalculator": {
+    "vehicle": "Vehicle",
+    "cars": "Cars",
+    "motorcycles": "Motorcycles",
+    "carType": "Car Type",
+    "petrolDiesel": "Petrol/Diesel",
+    "electric": "Electric",
+    "hybrid": "Hybrid",
+    "wheel": "Wheel",
+    "left": "Left",
+    "right": "Right",
+    "registration": "Registration",
+    "single": "Single",
+    "double": "Double",
+    "dateOfIssue": "Date of issue",
+    "engineVolume": "Engine Volume",
+    "howBody": "A customs service fee is added to the amount received, which is a fixed amount of $150, and an import tax (the service fee also includes filling out the declaration, you do not pay an additional fee for this service). To calculate the import tax, we multiply the cubic capacity of the car's engine by 0.05 and add the resulting number to the product of the age of the car, the cubic capacity of the engine and 0.0025. That is,",
+    "formula": "import tax = (cubic capacity * 0.05) + (cubic capacity * age * 0.0025)",
+    "previousRate": "Previous Rate",
+    "currentRate": "Current Rate",
+    "totalLabel": "The total cost of registration",
+    "excise": "Excise",
+    "customsService": "Customs service tax",
+    "registrationFee": "Registration",
+    "importTax": "Import tax",
+    "expert": "Expert assessment",
+    "declaration": "Customs declaration",
+    "transit": "Internal transit (up to 60 days)"
+  },
+  "titleTransfer": {
+    "sideTitle": "Transfer ownership instantly",
+    "sideSubtitle": "You only pay the reservation fee — {{fee}}",
+    "stepPersonal": "Personal Information",
+    "stepTime": "Reservation time",
+    "stepPay": "Confirm/Pay",
+    "orPhone": "Or book by phone",
+    "faq": "FAQ",
+    "faqHint": "Find the answer easily",
+    "contact": "Contact us",
+    "contactHint": "For booking or other inquiries",
+    "personalTitle": "Personal Information",
+    "personalSubtitle": "Make sure the information entered is correct",
+    "timeTitle": "Reservation time",
+    "timeSubtitle": "Choose a convenient date and time for the transfer",
+    "payTitle": "Confirm/Pay",
+    "paySubtitle": "Check the details and pay the reservation fee",
+    "vehicleQuestion": "What type of vehicle transfer would you like to make?",
+    "vehicleType": "Vehicle",
+    "car": "Car",
+    "motorcycle": "Motorcycle",
+    "payOnSite": "You will pay the transfer fee on site. For now — only the reservation fee",
+    "fullName": "Full name",
+    "personalId": "Personal ID number",
+    "contactNumber": "Contact number",
+    "agreePrefix": "By continuing, you agree to the",
+    "privacyPolicy": "privacy policy",
+    "continue": "Continue",
+    "back": "Back",
+    "required": "Please fill in all personal details.",
+    "pickTime": "Please choose a date and time.",
+    "pickDate": "Choose a date",
+    "pickHour": "Choose a time",
+    "transferFee": "Transfer fee on site",
+    "reservationNow": "Reservation fee now",
+    "pay": "Pay {{fee}}",
+    "successTitle": "Reservation confirmed",
+    "successBody": "Your transfer slot is reserved. Pay the remaining fee on site. For changes call {{phone}}."
+  },
+  "helpPage": {
+    "kicker": "Support",
+    "title": "Help Center",
+    "subtitle": "Search answers, browse common topics, or send us a message. We can help with listings, payments, and AutoShop services.",
+    "searchPlaceholder": "Search help articles...",
+    "topicsTitle": "Popular topics",
+    "faqTitle": "Frequently asked questions",
+    "empty": "No articles match this search.",
+    "contactTitle": "Still need help?",
+    "contactSubtitle": "Send a message and our team will get back to you. You can also call or email us directly.",
+    "hours": "Support hours: Monday–Saturday, 10:00–19:00",
+    "name": "Full name",
+    "email": "Email",
+    "topic": "Topic",
+    "message": "Message",
+    "send": "Send message",
+    "sending": "Sending...",
+    "sendAnother": "Send another message",
+    "successTitle": "Message sent",
+    "successBody": "Thanks. We saved your request and will reply to the email you provided.",
+    "categories": {
+      "all": "All",
+      "buying": "Buying",
+      "selling": "Selling",
+      "services": "Services",
+      "account": "Account",
+      "other": "Other"
+    },
+    "errors": {
+      "name": "Enter your name.",
+      "email": "Enter a valid email address.",
+      "message": "Write at least 10 characters so we can help.",
+      "failed": "Could not send the message. Please try again."
+    },
+    "topics": [
+      { "id": "buy", "title": "Find a car", "text": "Search listings and use filters in the catalogue.", "href": "/catalogue" },
+      { "id": "sell", "title": "Sell a car", "text": "Create an account and publish a listing with photos.", "href": "/add" },
+      { "id": "price", "title": "Price calculator", "text": "Estimate market price from similar published ads.", "href": "/price-calculator" },
+      { "id": "customs", "title": "Customs calculator", "text": "See import tax and registration costs in dollars.", "href": "/customs" },
+      { "id": "transfer", "title": "Title transfer", "text": "Reserve an ownership transfer appointment.", "href": "/title-transfer" },
+      { "id": "parts", "title": "Auto parts guide", "text": "Learn what car parts do and when to replace them.", "href": "/auto-parts" },
+      { "id": "dealers", "title": "Dealers", "text": "Browse local and international dealerships.", "href": "/dealers" },
+      { "id": "blog", "title": "Guides & blog", "text": "Read tips for buying, owning, and selling cars.", "href": "/blog" }
+    ],
+    "faqs": [
+      {
+        "id": "search",
+        "category": "buying",
+        "q": "How do I search for a car?",
+        "a": "Use the search bar in the header or open Catalogue to filter by brand, year, fuel type, and price. Results come from active listings published by private sellers and dealers."
+      },
+      {
+        "id": "contact-seller",
+        "category": "buying",
+        "q": "How do I contact a seller?",
+        "a": "Open the listing and use the contact details on the page. Sign in if you want to save favorites or return to a conversation later."
+      },
+      {
+        "id": "publish",
+        "category": "selling",
+        "q": "How do I add a listing?",
+        "a": "Click Add in the header, sign in or create an account, then fill in the vehicle details and upload photos. Listings stay in draft until you publish them."
+      },
+      {
+        "id": "photos",
+        "category": "selling",
+        "q": "What photos should I upload?",
+        "a": "Add clear photos of the exterior, interior, engine bay, and any damage. Keep each file under 15 MB. More photos usually get more views."
+      },
+      {
+        "id": "price-calc",
+        "category": "services",
+        "q": "How does the price calculator work?",
+        "a": "It looks at similar active sale listings and returns a median market estimate plus a typical price range. Fill in manufacturer and model at minimum; year, engine, and drive make the estimate tighter."
+      },
+      {
+        "id": "customs-fee",
+        "category": "services",
+        "q": "How is customs calculated?",
+        "a": "Open Customs in Services. Import tax uses cubic capacity and vehicle age: (cc × 0.05) + (cc × age × 0.0025). Other fees such as excise and registration are listed in the breakdown, in US dollars."
+      },
+      {
+        "id": "title",
+        "category": "services",
+        "q": "What is title transfer?",
+        "a": "It is a booked ownership transfer appointment. You pay a $49 reservation fee now and the remaining transfer fee on site. Choose car or motorcycle, then pick a date and time."
+      },
+      {
+        "id": "account",
+        "category": "account",
+        "q": "How do I create an account?",
+        "a": "Open Log in in the header, switch to Sign up, and use email and password or Continue with Google. You need an account to publish listings."
+      },
+      {
+        "id": "language",
+        "category": "account",
+        "q": "Can I use the site in Russian?",
+        "a": "Yes. Use the language control in the header to switch between English and Russian. Listings, help articles, and services follow the selected language."
+      }
+    ]
+  },
+  "contactPage": {
+    "kicker": "Get in touch",
+    "title": "Contacts",
+    "subtitle": "Visit our office, call, or send a message. We reply during support hours.",
+    "addressLabel": "Address",
+    "address": "14 Shartava Street, Tbilisi, Georgia",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "hoursLabel": "Hours",
+    "hours": "Monday–Saturday, 10:00–19:00",
+    "formTitle": "Send a message",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone (optional)",
+    "message": "Message",
+    "send": "Send message",
+    "sending": "Sending...",
+    "sendAnother": "Send another message",
+    "successTitle": "Message sent",
+    "successBody": "Thanks. We saved your request and will reply to the email you provided.",
+    "mapTitle": "Find us",
+    "mapSubtitle": "AutoShop office on the map. Open the full map for directions.",
+    "openMaps": "Open in OpenStreetMap",
+    "errors": {
+      "name": "Enter your name.",
+      "email": "Enter a valid email address.",
+      "message": "Write at least 10 characters so we can help.",
+      "failed": "Could not send the message. Please try again."
+    }
+  },
+  "auth": {
+    "title": "Account",
+    "close": "Close",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "signInTitle": "Welcome back",
+    "signUpTitle": "Create account",
+    "signInSubtitle": "Sign in to add listings and manage your account.",
+    "signUpSubtitle": "Create an account with email and password, or continue with Google.",
+    "email": "Email",
+    "password": "Password",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "signingIn": "Signing in...",
+    "signingUp": "Creating account...",
+    "loginFailed": "Authentication failed",
+    "continueWithGoogle": "Continue with Google",
+    "orEmail": "or use email",
+    "googleNotConfigured": "Google sign-in is not configured yet.",
+    "googleDenied": "Google sign-in was cancelled.",
+    "googleFailed": "Google sign-in failed. Please try again."
+  },
+  "addListing": {
+    "loading": "Loading form...",
+    "loadError": "Failed to load form data. Please refresh.",
+    "uploadError": "Photo upload failed.",
+    "submitError": "Failed to save listing.",
+    "submitting": "Saving...",
+    "uploading": "Uploading...",
+    "savedListings": "Saved listings",
+    "forSale": "For sale",
+    "forRent": "For rent",
+    "getLoan": "Get a loan in 2 mins",
+    "select": "Select",
+    "left": "Left",
+    "right": "Right",
+    "uploadPhotos": "Upload photos",
+    "maxVolume": "Max. Volume : 15 MB",
+    "remainingSymbols": "Remaining Symbols",
+    "priceNote": "The price will be displayed in GEL. In case of specifying dollars, it will be converted into GEL at the rate of the National Bank and reflected on the website.",
+    "sellFaster": "Sell faster",
+    "addServices": "Add services",
+    "save": "Save",
+    "saveHint": "The listing will be saved with the status - to be activated.",
+    "publish": "Publish",
+    "steps": {
+      "primary": "Primary Features",
+      "location": "Location and Customs Clearance",
+      "media": "Photo / Video",
+      "price": "Price",
+      "contact": "Contact"
+    },
+    "vin": {
+      "title": "Add by VIN",
+      "new": "New",
+      "description": "Enter the VIN, and the car information fields will be filled automatically.",
+      "placeholder": "VIN code",
+      "add": "Add",
+      "help": "Where can you find the VIN?"
+    },
+    "fields": {
+      "manufacturer": "Manufacturer",
+      "model": "Model",
+      "year": "Year",
+      "month": "Month",
+      "trim": "Trim",
+      "fuelType": "Fuel type",
+      "category": "Category",
+      "cylinders": "Number of Cylinders",
+      "engineVolume": "Engine Volume",
+      "turbo": "Turbo",
+      "mileage": "Mileage",
+      "wheel": "Wheel",
+      "transmission": "Transmission",
+      "driveWheels": "Drive wheels",
+      "airbags": "Airbags",
+      "carColor": "Car Color",
+      "interior": "Interior Material and Color",
+      "extraOptions": "Extra Options",
+      "description": "Vehicle Description",
+      "location": "Location",
+      "customsCleared": "Customs cleared",
+      "techInspection": "Technical inspection",
+      "checkInspectionTime": "Check the inspection time",
+      "photo": "Photo",
+      "video": "Video",
+      "enterPrice": "Enter the price",
+      "priceNegotiable": "Price negotiable",
+      "exchange": "Exchange for another car",
+      "name": "Name",
+      "phone": "Phone Number",
+      "callTime": "Call Time"
+    },
+    "videoHint": "Upload a car video and increase the number of interested people",
+    "videoPlaceholder": "e.g. https://www.youtube.com/watch...",
+    "promo": {
+      "superVip": {
+        "name": "SUPER VIP",
+        "price": "9.00₾/Day",
+        "benefits": [
+          "Show your car in SUPER VIP carousel, on the main page",
+          "Show your car before ANY listing"
+        ]
+      },
+      "vip": {
+        "name": "VIP",
+        "price": "3.00₾/Day",
+        "benefits": ["Show your car before any free listing"]
+      },
+      "vipPlus": {
+        "name": "VIP+",
+        "price": "5.00₾/Day",
+        "benefits": [
+          "Show your car in VIP+ carousel, on the main page",
+          "Show your car before any free or VIP listing"
+        ]
+      }
+    },
+    "services": {
+      "addColour": "Add colour",
+      "autoRenewal": "Automatic Renewal"
+    },
+    "stickers": {
+      "title": "Stickers",
+      "hint": "Up to 3 stickers can be purchased per listing."
+    }
+  }
+}

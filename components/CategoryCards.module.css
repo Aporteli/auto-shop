@@ -1,0 +1,151 @@
+.section {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  min-height: 280px;
+  padding: 1.75rem 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  z-index: 2;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+
+.lists {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 1.5rem;
+  flex: 1;
+}
+
+.listColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.link {
+  font-size: 0.875rem;
+  color: #4b5563;
+  text-decoration: none;
+  line-height: 1.4;
+  transition: color 0.15s ease;
+}
+
+.link:hover {
+  color: #f97316;
+}
+
+.seeAll {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #f97316;
+  text-decoration: none;
+  align-self: flex-start;
+  transition: opacity 0.15s ease;
+}
+
+.seeAll:hover {
+  opacity: 0.85;
+}
+
+.imageWrap {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  align-self: stretch;
+  min-width: 0;
+  text-decoration: none;
+}
+
+.image {
+  width: min(100%, 200px);
+  height: auto;
+  max-height: 200px;
+  object-fit: contain;
+  object-position: bottom right;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@media (max-width: 1024px) {
+  .card {
+    min-height: 260px;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .title {
+    font-size: 1.35rem;
+  }
+
+  .image {
+    width: min(100%, 160px);
+    max-height: 170px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .imageWrap {
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .image {
+    width: min(100%, 240px);
+    max-height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lists {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .listColumn + .listColumn {
+    margin-top: 0.25rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .card {
+    padding: 1.25rem 1rem;
+  }
+}

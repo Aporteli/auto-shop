@@ -1,0 +1,328 @@
+.page {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.hero {
+  margin-bottom: 2rem;
+}
+
+.kicker {
+  margin: 0 0 0.4rem;
+  color: #f97316;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  color: #111827;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.subtitle {
+  margin: 0.5rem 0 1.1rem;
+  max-width: 38rem;
+  color: #6b7280;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 32rem;
+}
+
+.search svg {
+  position: absolute;
+  left: 0.9rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.search input {
+  width: 100%;
+  height: 3rem;
+  padding: 0 1rem 0 2.6rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.search input:focus {
+  border-color: #fdba74;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12);
+}
+
+.section {
+  margin-bottom: 2.25rem;
+}
+
+.section h2,
+.contactInfo h2 {
+  margin: 0 0 0.95rem;
+  color: #111827;
+  font-size: 1.2rem;
+}
+
+.topicGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.topicCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-height: 7.5rem;
+  padding: 1rem 1.05rem;
+  border: 1px solid #e8edf3;
+  border-radius: 1rem;
+  background: #ffffff;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+}
+
+.topicCard strong {
+  color: #111827;
+  font-size: 0.95rem;
+}
+
+.topicCard span {
+  color: #6b7280;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.topicCard:hover {
+  border-color: #fdba74;
+}
+
+.faqHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.faqHeader h2 {
+  margin: 0;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chip {
+  padding: 0.35rem 0.7rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #4b5563;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chipActive {
+  border-color: #f97316;
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+.empty {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: #ffffff;
+  color: #9ca3af;
+  text-align: center;
+}
+
+.faqList {
+  border: 1px solid #e8edf3;
+  border-radius: 1rem;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.faqItem + .faqItem {
+  border-top: 1px solid #f1f4f8;
+}
+
+.faqButton {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem 1.1rem;
+  border: 0;
+  background: transparent;
+  color: #111827;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faqButton span {
+  color: #9ca3af;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.faqAnswer {
+  margin: 0;
+  padding: 0 1.1rem 1rem;
+  color: #4b5563;
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.contactSection {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.contactInfo,
+.form,
+.success {
+  padding: 1.25rem 1.3rem;
+  border: 1px solid #e8edf3;
+  border-radius: 1rem;
+  background: #ffffff;
+}
+
+.contactInfo p {
+  margin: 0 0 0.85rem;
+  color: #6b7280;
+  line-height: 1.55;
+}
+
+.contactLink {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #111827;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.contactLink:hover {
+  color: #ea580c;
+}
+
+.hours {
+  margin-top: 0.85rem !important;
+  font-size: 0.88rem;
+}
+
+.form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: #4b5563;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.form input,
+.form select,
+.form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.65rem;
+  background: #ffffff;
+  color: #111827;
+  font: inherit;
+  font-weight: 500;
+}
+
+.form textarea {
+  resize: vertical;
+  min-height: 7rem;
+}
+
+.formError {
+  margin: 0;
+  color: #b45309;
+  font-size: 0.86rem;
+}
+
+.submit {
+  justify-self: start;
+  min-height: 2.6rem;
+  padding: 0 1.15rem;
+  border: 0;
+  border-radius: 0.7rem;
+  background: #f97316;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.submit:disabled {
+  opacity: 0.75;
+  cursor: wait;
+}
+
+.success h3 {
+  margin: 0;
+  color: #166534;
+}
+
+.success p {
+  margin: 0.5rem 0 1rem;
+  color: #4b5563;
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) {
+  .topicGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contactSection {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .topicGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .topicCard {
+    min-height: 0;
+  }
+
+  .submit {
+    width: 100%;
+  }
+}

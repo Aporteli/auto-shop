@@ -1,0 +1,290 @@
+.page {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.hero {
+  padding: 0.25rem 0.15rem 0.15rem;
+}
+
+.kicker {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f97316;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #94a3b8;
+}
+
+.subtitle {
+  margin: 0.45rem 0 0;
+  max-width: 42rem;
+  color: #64748b;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.filterCard,
+.brandsCard {
+  background: #ffffff;
+  border: 1px solid #e8edf3;
+  border-radius: 1.25rem;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.05);
+}
+
+.filterCard {
+  padding: 1.15rem;
+}
+
+.filterGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.searchButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 3.1rem;
+  border: 0;
+  border-radius: 0.7rem;
+  background: linear-gradient(180deg, #fb923c 0%, #f97316 100%);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(249, 115, 22, 0.28);
+}
+
+.searchButton:hover {
+  background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
+}
+
+.brandsCard {
+  padding: 1.35rem 1.25rem 1.5rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.seeAllLink,
+.seeAllButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 0;
+  background: transparent;
+  color: #64748b;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.seeAllLink:hover,
+.seeAllButton:hover {
+  color: #ea580c;
+}
+
+.logoRow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.logoCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 7.5rem;
+  padding: 0.9rem 0.6rem 0.75rem;
+  border: 1px solid #e8edf3;
+  border-radius: 1rem;
+  background: #ffffff;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.logoCard:hover {
+  transform: translateY(-3px);
+  border-color: #fdba74;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+}
+
+.logoCard img {
+  width: 3.4rem;
+  height: 3.4rem;
+  object-fit: contain;
+}
+
+.monogram {
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 0.9rem;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.logoName {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #334155;
+  text-align: center;
+}
+
+.logoCount {
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
+.letterBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 1.4rem 0 1rem;
+}
+
+.letter {
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.45rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.letter:hover,
+.letterActive {
+  background: #fff7ed;
+  border-color: #fdba74;
+  color: #ea580c;
+}
+
+.brandDirectory {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.letterHeading {
+  margin: 0 0 0.45rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.brandColumns {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.2rem 1rem;
+}
+
+.brandLink {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  width: 100%;
+  padding: 0.4rem 0.15rem;
+  border: 0;
+  background: transparent;
+  color: #334155;
+  font-size: 0.92rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.brandLink:hover {
+  color: #ea580c;
+}
+
+.brandCount {
+  color: #94a3b8;
+  font-size: 0.82rem;
+}
+
+.footerAction {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.4rem;
+}
+
+.seeAllButton {
+  min-width: 8.5rem;
+  justify-content: center;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  background: #ffffff;
+}
+
+@media (max-width: 1100px) {
+  .filterGrid,
+  .logoRow,
+  .brandColumns {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .searchButton {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 720px) {
+  .filterGrid,
+  .logoRow,
+  .brandColumns {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .searchButton {
+    grid-column: 1 / -1;
+  }
+
+  .title {
+    color: #64748b;
+  }
+}
+
+@media (max-width: 520px) {
+  .logoRow,
+  .brandColumns {
+    grid-template-columns: 1fr;
+  }
+}

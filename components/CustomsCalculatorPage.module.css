@@ -1,0 +1,202 @@
+.page {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.tabs {
+  display: flex;
+  gap: 1.75rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.2rem 0 0.7rem;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tab svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.tabActive {
+  color: #f97316;
+  border-bottom-color: #f97316;
+  font-weight: 600;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.form {
+  min-width: 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-bottom: 1.05rem;
+}
+
+.label {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.82rem;
+}
+
+.toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.toggle {
+  min-width: 5.5rem;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.55rem;
+  background: #ffffff;
+  color: #374151;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.toggleActive {
+  background: #fff7ed;
+  border-color: #f97316;
+  color: #ea580c;
+  font-weight: 600;
+}
+
+.selects {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+  margin-bottom: 1.1rem;
+}
+
+.select {
+  width: 100%;
+  height: 2.7rem;
+  padding: 0 0.8rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.55rem;
+  background: #ffffff;
+  color: #111827;
+  font-size: 0.9rem;
+}
+
+.select:disabled {
+  color: #9ca3af;
+  background: #f3f4f6;
+  cursor: not-allowed;
+}
+
+.note {
+  margin: 0.25rem 0 0;
+  max-width: 38rem;
+  color: #6b7280;
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.note strong {
+  color: #4b5563;
+  font-weight: 700;
+}
+
+.result {
+  padding: 1.15rem 1.2rem 1.25rem;
+  border: 1px solid #edf0f4;
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.06);
+}
+
+.rateTabs {
+  display: flex;
+  gap: 1.1rem;
+  margin-bottom: 1.1rem;
+  border-bottom: 1px solid #eef1f4;
+}
+
+.rateTab {
+  padding: 0.15rem 0 0.65rem;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.rateTabActive {
+  color: #f97316;
+  border-bottom-color: #f97316;
+  font-weight: 600;
+}
+
+.totalLabel {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.92rem;
+}
+
+.total {
+  margin: 0.2rem 0 0.9rem;
+  color: #111827;
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.lines {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lines li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.42rem 0;
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+.lines li span:last-child {
+  color: #111827;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .selects {
+    grid-template-columns: 1fr;
+  }
+}
