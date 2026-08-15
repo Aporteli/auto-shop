@@ -1,9 +1,20 @@
-import 'dotenv/config';
-import { PrismaMariaDb } from '@prisma/adapter-mariadb';
-import { Currency, ListingStatus, ListingType, PrismaClient } from '@prisma/client';
-import { autoParts } from './seed-data/auto-parts';
-import { blogPosts } from './seed-data/blog-posts';
-import { features, interiorColors, interiorMaterials, stickers } from './seed-data/features-stickers';
+import "dotenv/config";
+import mariadb from "mariadb";
+import { PrismaMariaDb } from "@prisma/adapter-mariadb";
+import {
+  Currency,
+  ListingStatus,
+  ListingType,
+  PrismaClient,
+} from "@prisma/client";
+import { autoParts } from "./seed-data/auto-parts";
+import { blogPosts } from "./seed-data/blog-posts";
+import {
+  features,
+  interiorColors,
+  interiorMaterials,
+  stickers,
+} from "./seed-data/features-stickers";
 import {
   chunk,
   daysAgo,
@@ -18,9 +29,12 @@ import {
   randomInt,
   randomPlate,
   randomVin,
-} from './seed-data/helpers';
-import { countries } from './seed-data/locations';
-import { expandManufacturersWithVariants, manufacturers as baseManufacturers } from './seed-data/manufacturers';
+} from "./seed-data/helpers";
+import { countries } from "./seed-data/locations";
+import {
+  expandManufacturersWithVariants,
+  manufacturers as baseManufacturers,
+} from "./seed-data/manufacturers";
 import {
   bodyTypes,
   colors,
@@ -28,35 +42,83 @@ import {
   fuelTypes,
   transmissions,
   vehicleCategories,
-} from './seed-data/reference';
+} from "./seed-data/reference";
 
-const adapter = new PrismaMariaDb(
-  process.env.DATABASE_URL != null
-    ? process.env.DATABASE_URL
-    : {
-        host: process.env.DB_HOST || 'localhost',
-        port: Number(process.env.DB_PORT) || 3306,
-        user: process.env.DB_USER || 'root',
-        password: process.env.DB_PASSWORD || '',
-        database: process.env.DB_NAME || 'auto_shop_db',
-        connectionLimit: 10,
-      },
-);
+const isRemoteDb =
+  process.env.NODE_ENV === "production" ||
+  Boolean(process.env.DB_HOST && process.env.DB_HOST !== "localhost") ||
+  Boolean(
+    process.env.DATABASE_URL && !process.env.DATABASE_URL.includes("localhost"),
+  );
+
+const ssl = isRemoteDb
+  ? { minVersion: "TLSv1.2" as const, rejectUnauthorized: true }
+  : undefined;
+
+function poolConfigFromUrl(url: string): mariadb.PoolConfig {
+  const parsed = new URL(url);
+  return {
+    host: parsed.hostname,
+    port: parsed.port ? Number(parsed.port) : 3306,
+    user: decodeURIComponent(parsed.username),
+    password: decodeURIComponent(parsed.password),
+    database: parsed.pathname.replace(/^\//, "").split("?")[0],
+    connectionLimit: 10,
+    acquireTimeout: 20000,
+    connectTimeout: 20000,
+    ssl,
+  };
+}
+
+const adapterConfig: mariadb.PoolConfig = process.env.DATABASE_URL
+  ? poolConfigFromUrl(process.env.DATABASE_URL)
+  : {
+      host: process.env.DB_HOST || "localhost",
+      port: Number(process.env.DB_PORT) || 3306,
+      user: process.env.DB_USER || "root",
+      password: process.env.DB_PASSWORD || "",
+      database: process.env.DB_NAME || "auto_shop_db",
+      connectionLimit: 10,
+      acquireTimeout: 20000,
+      connectTimeout: 20000,
+      ssl,
+    };
+
+const adapter = new PrismaMariaDb(adapterConfig);
 
 const prisma = new PrismaClient({ adapter });
 
 const LISTING_COUNT = Number(process.env.SEED_LISTING_COUNT) || 3500;
-const LISTING_BATCH_SIZE = 25;
+const LISTING_BATCH_SIZE = 250;
+const LISTING_CONCURRENCY = 8;
 const PRIVATE_USER_COUNT = 40;
 const DEALER_COUNT = dealersSeed.length;
 
-const ALLOWED_CATEGORY_SLUGS = ['cars', 'custom-vehicles', 'motorcycles'] as const;
+const ALLOWED_CATEGORY_SLUGS = [
+  "cars",
+  "custom-vehicles",
+  "motorcycles",
+] as const;
 
-const motorcycleBrands = new Set(['Harley-Davidson', 'Yamaha', 'Kawasaki', 'Ducati', 'KTM']);
-const customVehicleBrands = new Set(['MAN', 'Scania', 'DAF', 'Iveco', 'Isuzu', 'GAZ', 'Volvo']);
+const motorcycleBrands = new Set([
+  "Harley-Davidson",
+  "Yamaha",
+  "Kawasaki",
+  "Ducati",
+  "KTM",
+]);
+const customVehicleBrands = new Set([
+  "MAN",
+  "Scania",
+  "DAF",
+  "Iveco",
+  "Isuzu",
+  "GAZ",
+  "Volvo",
+]);
 
-type UserRole = 'USER' | 'DEALER' | 'ADMIN';
-type SteeringWheel = 'LEFT' | 'RIGHT';
+type UserRole = "USER" | "DEALER" | "ADMIN";
+type SteeringWheel = "LEFT" | "RIGHT";
 type IdRecord = { id: number };
 type SlugRecord = { id: number; slug: string };
 type ModelRecord = {
@@ -81,7 +143,7 @@ type SeedContext = {
 };
 
 async function clearTransactionalData() {
-  console.log('  Clearing existing transactional data...');
+  console.log("  Clearing existing transactional data...");
   await prisma.auctionBid.deleteMany();
   await prisma.rental.deleteMany();
   await prisma.listingFeature.deleteMany();
@@ -96,20 +158,22 @@ async function clearTransactionalData() {
   await prisma.vinCheck.deleteMany();
   await prisma.technicalInspection.deleteMany();
   await prisma.blogPost.deleteMany();
-  await prisma.user.deleteMany({ where: { email: { not: 'admin@autoshop.com' } } });
+  await prisma.user.deleteMany({
+    where: { email: { not: "admin@autoshop.com" } },
+  });
 }
 
 async function seedReferenceData(): Promise<
   Pick<
     SeedContext,
-    | 'categories'
-    | 'bodyTypes'
-    | 'fuelTypes'
-    | 'transmissions'
-    | 'driveTypes'
-    | 'colors'
-    | 'features'
-    | 'stickers'
+    | "categories"
+    | "bodyTypes"
+    | "fuelTypes"
+    | "transmissions"
+    | "driveTypes"
+    | "colors"
+    | "features"
+    | "stickers"
   >
 > {
   await prisma.vehicleCategory.deleteMany({
@@ -128,25 +192,41 @@ async function seedReferenceData(): Promise<
 
   const bodyTypeRecords = await Promise.all(
     bodyTypes.map((b) =>
-      prisma.bodyType.upsert({ where: { nameEn: b.nameEn }, update: {}, create: b }),
+      prisma.bodyType.upsert({
+        where: { nameEn: b.nameEn },
+        update: {},
+        create: b,
+      }),
     ),
   );
 
   const fuelTypeRecords = await Promise.all(
     fuelTypes.map((f) =>
-      prisma.fuelType.upsert({ where: { nameEn: f.nameEn }, update: {}, create: f }),
+      prisma.fuelType.upsert({
+        where: { nameEn: f.nameEn },
+        update: {},
+        create: f,
+      }),
     ),
   );
 
   const transmissionRecords = await Promise.all(
     transmissions.map((t) =>
-      prisma.transmission.upsert({ where: { nameEn: t.nameEn }, update: {}, create: t }),
+      prisma.transmission.upsert({
+        where: { nameEn: t.nameEn },
+        update: {},
+        create: t,
+      }),
     ),
   );
 
   const driveTypeRecords = await Promise.all(
     driveTypes.map((d) =>
-      prisma.driveType.upsert({ where: { nameEn: d.nameEn }, update: {}, create: d }),
+      prisma.driveType.upsert({
+        where: { nameEn: d.nameEn },
+        update: {},
+        create: d,
+      }),
     ),
   );
 
@@ -174,7 +254,9 @@ async function seedReferenceData(): Promise<
 
     for (const cityData of countryData.cities) {
       await prisma.city.upsert({
-        where: { countryId_nameEn: { countryId: country.id, nameEn: cityData.nameEn } },
+        where: {
+          countryId_nameEn: { countryId: country.id, nameEn: cityData.nameEn },
+        },
         update: {},
         create: { ...cityData, countryId: country.id },
       });
@@ -189,16 +271,26 @@ async function seedReferenceData(): Promise<
 
   const stickerRecords = await Promise.all(
     stickers.map((s) =>
-      prisma.sticker.upsert({ where: { nameEn: s.nameEn }, update: {}, create: s }),
+      prisma.sticker.upsert({
+        where: { nameEn: s.nameEn },
+        update: {},
+        create: s,
+      }),
     ),
   );
 
   console.log(`  ✓ ${categories.length} categories`);
-  console.log(`  ✓ ${bodyTypeRecords.length} body types, ${fuelTypeRecords.length} fuel types`);
-  console.log(`  ✓ ${transmissionRecords.length} transmissions, ${driveTypeRecords.length} drive types`);
+  console.log(
+    `  ✓ ${bodyTypeRecords.length} body types, ${fuelTypeRecords.length} fuel types`,
+  );
+  console.log(
+    `  ✓ ${transmissionRecords.length} transmissions, ${driveTypeRecords.length} drive types`,
+  );
   console.log(`  ✓ ${colorRecords.length} colors`);
   console.log(`  ✓ ${countries.length} countries, ${cityCount} cities`);
-  console.log(`  ✓ ${featureRecords.length} features, ${stickerRecords.length} stickers`);
+  console.log(
+    `  ✓ ${featureRecords.length} features, ${stickerRecords.length} stickers`,
+  );
 
   return {
     categories,
@@ -216,7 +308,10 @@ async function seedManufacturersAndModels(): Promise<ModelRecord[]> {
   const expanded = expandManufacturersWithVariants(baseManufacturers, 2);
   let modelCount = 0;
 
-  for (const mfr of expanded) {
+  console.log(`  Processing ${expanded.length} manufacturers in parallel...`);
+
+  // პარალელურად ვამუშავებთ მწარმოებლებს და მათ მოდელებს
+  await runWithConcurrency(expanded, 10, async (mfr) => {
     const manufacturer = await prisma.manufacturer.upsert({
       where: { nameEn: mfr.nameEn },
       update: { nameRu: mfr.nameRu, country: mfr.country },
@@ -225,13 +320,18 @@ async function seedManufacturersAndModels(): Promise<ModelRecord[]> {
 
     for (const mdl of mfr.models) {
       await prisma.model.upsert({
-        where: { manufacturerId_nameEn: { manufacturerId: manufacturer.id, nameEn: mdl.nameEn } },
+        where: {
+          manufacturerId_nameEn: {
+            manufacturerId: manufacturer.id,
+            nameEn: mdl.nameEn,
+          },
+        },
         update: { nameRu: mdl.nameRu },
         create: { ...mdl, manufacturerId: manufacturer.id },
       });
       modelCount++;
     }
-  }
+  });
 
   const models: ModelRecord[] = await prisma.model.findMany({
     include: { manufacturer: true },
@@ -243,15 +343,15 @@ async function seedManufacturersAndModels(): Promise<ModelRecord[]> {
 
 async function seedUsersAndDealers() {
   const admin = await prisma.user.upsert({
-    where: { email: 'admin@autoshop.com' },
+    where: { email: "admin@autoshop.com" },
     update: {},
     create: {
-      email: 'admin@autoshop.com',
-      passwordHash: '$2b$10$placeholder_hash_replace_later',
-      firstName: 'Admin',
-      lastName: 'AutoShop',
-      role: 'ADMIN',
-      language: 'EN',
+      email: "admin@autoshop.com",
+      passwordHash: "$2b$10$placeholder_hash_replace_later",
+      firstName: "Admin",
+      lastName: "AutoShop",
+      role: "ADMIN",
+      language: "EN",
       isVerified: true,
     },
   });
@@ -261,12 +361,12 @@ async function seedUsersAndDealers() {
     const user = await prisma.user.create({
       data: {
         email: `user${i + 1}@autoshop-demo.com`,
-        passwordHash: '$2b$10$placeholder_hash_replace_later',
+        passwordHash: "$2b$10$placeholder_hash_replace_later",
         firstName: pickRandom(firstNamesEn),
         lastName: pickRandom(lastNamesEn),
         phone: `+9955${String(randomInt(1000000, 9999999))}`,
-        role: 'USER' as UserRole,
-        language: i % 3 === 0 ? 'RU' : 'EN',
+        role: "USER" as UserRole,
+        language: i % 3 === 0 ? "RU" : "EN",
         isVerified: Math.random() > 0.3,
       },
     });
@@ -280,12 +380,12 @@ async function seedUsersAndDealers() {
     const user = await prisma.user.create({
       data: {
         email: `dealer${i + 1}@autoshop-demo.com`,
-        passwordHash: '$2b$10$placeholder_hash_replace_later',
-        firstName: 'Dealer',
-        lastName: seed.en.split(' ')[0],
-        phone: seed.phone.replace(/\s+/g, ''),
-        role: 'DEALER' as UserRole,
-        language: i % 2 === 0 ? 'EN' : 'RU',
+        passwordHash: "$2b$10$placeholder_hash_replace_later",
+        firstName: "Dealer",
+        lastName: seed.en.split(" ")[0],
+        phone: seed.phone.replace(/\s+/g, ""),
+        role: "DEALER" as UserRole,
+        language: i % 2 === 0 ? "EN" : "RU",
         isVerified: true,
       },
     });
@@ -303,7 +403,7 @@ async function seedUsersAndDealers() {
         address: seed.addressEn,
         addressRu: seed.addressRu,
         phone: seed.phone,
-        dealerType: i % 4 === 0 ? 'INTERNATIONAL' : 'LOCAL',
+        dealerType: i % 4 === 0 ? "INTERNATIONAL" : "LOCAL",
         verified: Math.random() > 0.2,
       },
     });
@@ -313,23 +413,26 @@ async function seedUsersAndDealers() {
   }
 
   const allUsers = [admin, ...privateUsers, ...dealerUsers];
-  console.log(`  ✓ ${allUsers.length} users (${PRIVATE_USER_COUNT} private, ${DEALER_COUNT} dealers, 1 admin)`);
+  console.log(
+    `  ✓ ${allUsers.length} users (${PRIVATE_USER_COUNT} private, ${DEALER_COUNT} dealers, 1 admin)`,
+  );
   return { admin, privateUsers, dealerUsers, dealers, allUsers };
 }
 
 function resolveCategoryId(
-  model: SeedContext['models'][number],
-  categories: SeedContext['categories'],
+  model: SeedContext["models"][number],
+  categories: SeedContext["categories"],
 ): number {
   const bySlug = (slug: (typeof ALLOWED_CATEGORY_SLUGS)[number]) =>
-    categories.find((category) => category.slug === slug)?.id ?? categories[0].id;
+    categories.find((category) => category.slug === slug)?.id ??
+    categories[0].id;
 
   const brand = model.manufacturer.nameEn;
 
-  if (motorcycleBrands.has(brand)) return bySlug('motorcycles');
-  if (customVehicleBrands.has(brand)) return bySlug('custom-vehicles');
-  if (Math.random() < 0.06) return bySlug('custom-vehicles');
-  return bySlug('cars');
+  if (motorcycleBrands.has(brand)) return bySlug("motorcycles");
+  if (customVehicleBrands.has(brand)) return bySlug("custom-vehicles");
+  if (Math.random() < 0.06) return bySlug("custom-vehicles");
+  return bySlug("cars");
 }
 
 function buildListingData(ctx: SeedContext, index: number) {
@@ -352,17 +455,28 @@ function buildListingData(ctx: SeedContext, index: number) {
   const priceNegotiable = Math.random() < 0.25;
   const listingTypeRoll = Math.random();
   const listingType: ListingType =
-    listingTypeRoll < 0.08 ? 'AUCTION' : listingTypeRoll < 0.12 ? 'RENT' : 'SALE';
-  const currency: Currency = pickRandom(['USD', 'USD', 'USD', 'EUR', 'GEL']);
+    listingTypeRoll < 0.08
+      ? "AUCTION"
+      : listingTypeRoll < 0.12
+        ? "RENT"
+        : "SALE";
+  const currency: Currency = pickRandom(["USD", "USD", "USD", "EUR", "GEL"]);
   const customsCleared = Math.random() > 0.35;
   const has360 = Math.random() < 0.08;
   const isVip = Math.random() < 0.05;
   const withVin = Math.random() < 0.7;
-  const steeringWheel: SteeringWheel = Math.random() < 0.92 ? 'LEFT' : 'RIGHT';
-  const status: ListingStatus = Math.random() < 0.97 ? 'ACTIVE' : pickRandom(['SOLD', 'MODERATION', 'DRAFT']);
+  const steeringWheel: SteeringWheel = Math.random() < 0.92 ? "LEFT" : "RIGHT";
+  const status: ListingStatus =
+    Math.random() < 0.97
+      ? "ACTIVE"
+      : pickRandom(["SOLD", "MODERATION", "DRAFT"]);
   const createdAt = daysAgo(randomInt(0, 540));
-  const featureIds = pickRandomMany(ctx.features, 4, 14).map((feature) => feature.id);
-  const stickerIds = pickRandomMany(ctx.stickers, 0, 3).map((sticker) => sticker.id);
+  const featureIds = pickRandomMany(ctx.features, 4, 14).map(
+    (feature) => feature.id,
+  );
+  const stickerIds = pickRandomMany(ctx.stickers, 0, 3).map(
+    (sticker) => sticker.id,
+  );
   const imageCount = randomInt(2, 6);
   const descIdx = index % listingDescriptionsEn.length;
   const interiorColor = pickRandom(interiorColors);
@@ -389,7 +503,7 @@ function buildListingData(ctx: SeedContext, index: number) {
     currency,
     priceNegotiable,
     mileage,
-    mileageUnit: Math.random() < 0.95 ? ('KM' as const) : ('MI' as const),
+    mileageUnit: Math.random() < 0.95 ? ("KM" as const) : ("MI" as const),
     engineVolume,
     enginePower,
     cylinders: pickRandom([3, 4, 4, 4, 6, 8, 12]),
@@ -429,32 +543,108 @@ function buildListingData(ctx: SeedContext, index: number) {
   };
 }
 
-async function seedListings(ctx: SeedContext) {
-  console.log(`  Generating ${LISTING_COUNT} listings in batches of ${LISTING_BATCH_SIZE}...`);
-  let created = 0;
-
-  for (const batchIndexes of chunk(Array.from({ length: LISTING_COUNT }, (_, i) => i), LISTING_BATCH_SIZE)) {
-    await prisma.$transaction(
-      batchIndexes.map((index) => {
-        const data = buildListingData(ctx, index);
-        const { featureIds, stickerIds, images, ...listingFields } = data;
-        return prisma.listing.create({
-          data: {
-            ...listingFields,
-            images: { create: images },
-            features: { create: featureIds.map((featureId) => ({ featureId })) },
-            stickers: { create: stickerIds.map((stickerId) => ({ stickerId })) },
-          },
-        });
-      }),
-    );
-    created += batchIndexes.length;
-    if (created % 250 === 0 || created === LISTING_COUNT) {
-      console.log(`    ... ${created}/${LISTING_COUNT} listings`);
+async function runWithConcurrency<T>(
+  items: T[],
+  concurrency: number,
+  worker: (item: T) => Promise<void>,
+) {
+  let next = 0;
+  const run = async () => {
+    while (next < items.length) {
+      const current = next++;
+      await worker(items[current]);
     }
-  }
+  };
+  await Promise.all(
+    Array.from({ length: Math.min(concurrency, items.length) }, () => run()),
+  );
+}
 
-  console.log(`  ✓ ${created} listings with images, features, and stickers`);
+async function seedListingBatch(ctx: SeedContext, batchIndexes: number[]) {
+  const payloads = batchIndexes.map((index) => buildListingData(ctx, index));
+  const listingFields = payloads.map(
+    ({ featureIds, stickerIds, images, ...fields }) => fields,
+  );
+
+  await prisma.$transaction(
+    async (tx) => {
+      // MySQL/MariaDB/TiDB has no createManyAndReturn; LAST_INSERT_ID() is
+      // session-scoped so this is safe inside an interactive transaction.
+      await tx.listing.createMany({ data: listingFields });
+      const [meta] = await tx.$queryRaw<[{ firstId: bigint | number }]>`
+        SELECT LAST_INSERT_ID() AS firstId
+      `;
+      const firstId = Number(meta.firstId);
+      if (!Number.isInteger(firstId) || firstId <= 0) {
+        throw new Error(
+          `Failed to resolve listing IDs after createMany (LAST_INSERT_ID=${firstId})`,
+        );
+      }
+      const createdListings = listingFields.map((_, i) => ({
+        id: firstId + i,
+      }));
+
+      const imageRows = createdListings.flatMap((listing, i) =>
+        payloads[i].images.map((image) => ({
+          listingId: listing.id,
+          ...image,
+        })),
+      );
+      const featureRows = createdListings.flatMap((listing, i) =>
+        payloads[i].featureIds.map((featureId) => ({
+          listingId: listing.id,
+          featureId,
+        })),
+      );
+      const stickerRows = createdListings.flatMap((listing, i) =>
+        payloads[i].stickerIds.map((stickerId) => ({
+          listingId: listing.id,
+          stickerId,
+        })),
+      );
+
+      if (imageRows.length)
+        await tx.listingImage.createMany({ data: imageRows });
+      if (featureRows.length) {
+        await tx.listingFeature.createMany({
+          data: featureRows,
+          skipDuplicates: true,
+        });
+      }
+      if (stickerRows.length) {
+        await tx.listingSticker.createMany({
+          data: stickerRows,
+          skipDuplicates: true,
+        });
+      }
+    },
+    { timeout: 120_000, maxWait: 30_000 },
+  );
+}
+
+async function seedListings(ctx: SeedContext) {
+  console.log(
+    `  Generating ${LISTING_COUNT} listings in batches of ${LISTING_BATCH_SIZE} (${LISTING_CONCURRENCY} concurrent)...`,
+  );
+  let currentCount = 0;
+  const batches = chunk(
+    Array.from({ length: LISTING_COUNT }, (_, i) => i),
+    LISTING_BATCH_SIZE,
+  );
+
+  await runWithConcurrency(
+    batches,
+    LISTING_CONCURRENCY,
+    async (batchIndexes) => {
+      await seedListingBatch(ctx, batchIndexes);
+      currentCount += batchIndexes.length;
+      console.log(`⏳ Seeded ${currentCount} / ${LISTING_COUNT} listings...`);
+    },
+  );
+
+  console.log(
+    `  ✓ ${currentCount} listings with images, features, and stickers`,
+  );
 }
 
 async function seedBlogPosts() {
@@ -514,7 +704,7 @@ async function seedReviewsAndFavorites(
   const listings: { id: number }[] = await prisma.listing.findMany({
     select: { id: true },
     take: 500,
-    orderBy: { id: 'asc' },
+    orderBy: { id: "asc" },
   });
 
   let reviewCount = 0;
@@ -528,11 +718,11 @@ async function seedReviewsAndFavorites(
             dealerId: dealer.id,
             rating: randomInt(3, 5),
             comment: pickRandom([
-              'Great service and fair prices.',
-              'Professional team, smooth purchase.',
-              'Wide selection, helpful staff.',
-              'Отличный сервис и честные цены.',
-              'Профессиональная команда.',
+              "Great service and fair prices.",
+              "Professional team, smooth purchase.",
+              "Wide selection, helpful staff.",
+              "Отличный сервис и честные цены.",
+              "Профессиональная команда.",
             ]),
             createdAt: daysAgo(randomInt(1, 300)),
           },
@@ -568,10 +758,10 @@ async function seedVinChecksAndInspections() {
       data: {
         vin,
         result: {
-          status: pickRandom(['clean', 'clean', 'clean', 'warning']),
+          status: pickRandom(["clean", "clean", "clean", "warning"]),
           accidents: randomInt(0, 2),
           owners: randomInt(1, 4),
-          country: pickRandom(['USA', 'Germany', 'Japan', 'Georgia']),
+          country: pickRandom(["USA", "Germany", "Japan", "Georgia"]),
         },
         checkedAt: daysAgo(randomInt(0, 90)),
       },
@@ -587,7 +777,7 @@ async function seedVinChecksAndInspections() {
         plateNumber: randomPlate(),
         inspectionDate,
         expiryDate: expiry,
-        status: pickRandom(['VALID', 'VALID', 'DUE_SOON', 'EXPIRED']),
+        status: pickRandom(["VALID", "VALID", "DUE_SOON", "EXPIRED"]),
         checkedAt: daysAgo(randomInt(0, 30)),
       },
     });
@@ -596,9 +786,12 @@ async function seedVinChecksAndInspections() {
   console.log(`  ✓ ${vins.length} VIN checks, 150 technical inspections`);
 }
 
-async function seedAuctionBids(listings: { id: number }[], users: { id: number }[]) {
+async function seedAuctionBids(
+  listings: { id: number }[],
+  users: { id: number }[],
+) {
   const auctionListings = await prisma.listing.findMany({
-    where: { listingType: 'AUCTION' },
+    where: { listingType: "AUCTION" },
     select: { id: true, price: true },
     take: 80,
   });
@@ -624,21 +817,23 @@ async function seedAuctionBids(listings: { id: number }[], users: { id: number }
 }
 
 async function main() {
-  console.log('🌱 Seeding AutoShop database (large dataset)...\n');
+  console.log("🌱 Seeding AutoShop database (large dataset)...\n");
   console.log(`   Target listings: ${LISTING_COUNT}\n`);
 
   await clearTransactionalData();
 
-  console.log('Reference data:');
+  console.log("Reference data:");
   const ref = await seedReferenceData();
 
-  console.log('\nManufacturers & models:');
+  console.log("\nManufacturers & models:");
   const models = await seedManufacturersAndModels();
 
-  console.log('\nUsers & dealers:');
+  console.log("\nUsers & dealers:");
   const { privateUsers, dealers, allUsers } = await seedUsersAndDealers();
 
-  const cities: IdRecord[] = await prisma.city.findMany({ select: { id: true } });
+  const cities: IdRecord[] = await prisma.city.findMany({
+    select: { id: true },
+  });
 
   const ctx: SeedContext = {
     ...ref,
@@ -647,16 +842,19 @@ async function main() {
     users: allUsers,
   };
 
-  console.log('\nListings:');
+  console.log("\nListings:");
   await seedListings(ctx);
 
-  console.log('\nAdditional content:');
+  console.log("\nAdditional content:");
   await seedBlogPosts();
   await seedAutoParts();
   await seedReviewsAndFavorites(dealers, privateUsers);
   await seedVinChecksAndInspections();
 
-  const listingSample = await prisma.listing.findMany({ select: { id: true }, take: 100 });
+  const listingSample = await prisma.listing.findMany({
+    select: { id: true },
+    take: 100,
+  });
   await seedAuctionBids(listingSample, allUsers);
 
   const stats = await Promise.all([
@@ -672,8 +870,8 @@ async function main() {
     prisma.autoPart.count(),
   ]);
 
-  console.log('\n✅ Seed complete!\n');
-  console.log('   Database totals:');
+  console.log("\n✅ Seed complete!\n");
+  console.log("   Database totals:");
   console.log(`   • Categories:     ${stats[0]}`);
   console.log(`   • Manufacturers:  ${stats[1]}`);
   console.log(`   • Models:         ${stats[2]}`);
