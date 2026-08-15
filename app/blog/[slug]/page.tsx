@@ -2,6 +2,9 @@ import { notFound } from 'next/navigation';
 import BlogPostPage from '@/components/BlogPostPage';
 import { getBlogPostBySlug } from '@/lib/queries';
 
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+
 type BlogPostRouteProps = {
   params: Promise<{ slug: string }>;
 };

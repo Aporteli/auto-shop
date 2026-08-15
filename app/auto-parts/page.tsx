@@ -1,6 +1,8 @@
 import AutoPartsPage from '@/components/AutoPartsPage';
 import { getAutoParts } from '@/lib/queries';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Auto Parts | AutoShop',
   description:

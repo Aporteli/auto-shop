@@ -16,6 +16,8 @@ import {
 } from '@/lib/queries';
 import { serializeListingsForSlider } from '@/lib/listingSlider';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const [superVipListings, vipPlusListings, stickerCounts, recentListings, internationalDealers, localDealers, blogPosts] =
     await Promise.all([

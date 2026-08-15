@@ -1,7 +1,13 @@
+import { connection } from 'next/server';
 import { prisma } from './prisma';
 
+async function db() {
+  await connection();
+  return prisma;
+}
+
 export async function getLatestListings(limit = 10) {
-  return prisma.listing.findMany({
+  return (await db()).listing.findMany({
     where: { status: 'ACTIVE' },
     orderBy: { createdAt: 'desc' },
     take: limit,
@@ -16,7 +22,7 @@ export async function getLatestListings(limit = 10) {
 }
 
 export async function getVipListings(limit = 10) {
-  return prisma.listing.findMany({
+  return (await db()).listing.findMany({
     where: { status: 'ACTIVE', isVip: true },
     orderBy: { createdAt: 'desc' },
     take: limit,
@@ -31,7 +37,7 @@ export async function getVipListings(limit = 10) {
 }
 
 export async function getFeaturedListings(limit = 12) {
-  return prisma.listing.findMany({
+  return (await db()).listing.findMany({
     where: { status: 'ACTIVE', isVip: false },
     orderBy: { createdAt: 'desc' },
     take: limit,
@@ -46,7 +52,7 @@ export async function getFeaturedListings(limit = 12) {
 }
 
 export async function getStickerCounts() {
-  const stickers = await prisma.sticker.findMany({
+  const stickers = await (await db()).sticker.findMany({
     include: {
       _count: { select: { listings: true } },
     },
@@ -63,7 +69,7 @@ export async function getStickerCounts() {
 }
 
 export async function getRecentListingsByCategory(categorySlug: string, limit = 5) {
-  return prisma.listing.findMany({
+  return (await db()).listing.findMany({
     where: {
       status: 'ACTIVE',
       category: { slug: categorySlug },
@@ -81,7 +87,7 @@ export async function getRecentListingsByCategory(categorySlug: string, limit = 
 }
 
 export async function getDealersByType(type: 'LOCAL' | 'INTERNATIONAL', limit = 6) {
-  const dealers = await prisma.dealer.findMany({
+  const dealers = await (await db()).dealer.findMany({
     where: { dealerType: type },
     include: {
       user: {
@@ -106,7 +112,7 @@ export async function getDealersByType(type: 'LOCAL' | 'INTERNATIONAL', limit = 
 }
 
 export async function getBlogPosts(limit?: number) {
-  return prisma.blogPost.findMany({
+  return (await db()).blogPost.findMany({
     where: { published: true },
     orderBy: { publishedAt: 'desc' },
     ...(limit ? { take: limit } : {}),
@@ -114,29 +120,29 @@ export async function getBlogPosts(limit?: number) {
 }
 
 export async function getBlogPostBySlug(slug: string) {
-  return prisma.blogPost.findFirst({
+  return (await db()).blogPost.findFirst({
     where: { slug, published: true },
   });
 }
 
 export async function getListingCount() {
-  return prisma.listing.count({ where: { status: 'ACTIVE' } });
+  return (await db()).listing.count({ where: { status: 'ACTIVE' } });
 }
 
 export async function getAutoParts() {
-  return prisma.autoPart.findMany({
+  return (await db()).autoPart.findMany({
     orderBy: [{ categoryEn: 'asc' }, { nameEn: 'asc' }],
   });
 }
 
 export async function getAutoPartBySlug(slug: string) {
-  return prisma.autoPart.findUnique({
+  return (await db()).autoPart.findUnique({
     where: { slug },
   });
 }
 
 export async function getRelatedAutoParts(categorySlug: string, excludeSlug: string, limit = 6) {
-  return prisma.autoPart.findMany({
+  return (await db()).autoPart.findMany({
     where: { categorySlug, slug: { not: excludeSlug } },
     orderBy: { nameEn: 'asc' },
     take: limit,

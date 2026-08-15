@@ -3,6 +3,9 @@ import { notFound } from 'next/navigation';
 import AutoPartDetailPage from '@/components/AutoPartDetailPage';
 import { getAutoPartBySlug, getRelatedAutoParts } from '@/lib/queries';
 
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+
 type AutoPartRouteProps = {
   params: Promise<{ slug: string }>;
 };
