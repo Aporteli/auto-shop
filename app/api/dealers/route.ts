@@ -58,15 +58,8 @@ export async function GET(request: NextRequest) {
       dealers: formattedDealers,
       total: formattedDealers.length,
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error fetching dealers in /api/dealers:', error);
-    return NextResponse.json(
-      { 
-        error: error.message || 'Failed to fetch dealers',
-        dealers: [],
-        total: 0 
-      },
-      { status: 500 }
-    );
+    return NextResponse.json({ dealers: [], total: 0 });
   }
 }

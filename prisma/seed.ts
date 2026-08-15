@@ -30,17 +30,18 @@ import {
   vehicleCategories,
 } from './seed-data/reference';
 
-const adapter =
+const adapter = new PrismaMariaDb(
   process.env.DATABASE_URL != null
-    ? new PrismaMariaDb(process.env.DATABASE_URL)
-    : new PrismaMariaDb({
+    ? process.env.DATABASE_URL
+    : {
         host: process.env.DB_HOST || 'localhost',
         port: Number(process.env.DB_PORT) || 3306,
         user: process.env.DB_USER || 'root',
         password: process.env.DB_PASSWORD || '',
         database: process.env.DB_NAME || 'auto_shop_db',
         connectionLimit: 10,
-      });
+      },
+);
 
 const prisma = new PrismaClient({ adapter });
 
