@@ -1,68 +1,75 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
-export async function GET() {
-  const [
-    manufacturers,
-    bodyTypes,
-    fuelTypes,
-    transmissions,
-    driveTypes,
-    colors,
-    categories,
-    countries,
-    models,
-    years,
-    prices,
-    features,
-    stickers,
-  ] = await Promise.all([
-    prisma.manufacturer.findMany({
-      orderBy: { nameEn: 'asc' },
-      include: { models: { orderBy: { nameEn: 'asc' } } },
-    }),
-    prisma.bodyType.findMany({ orderBy: { nameEn: 'asc' } }),
-    prisma.fuelType.findMany({ orderBy: { nameEn: 'asc' } }),
-    prisma.transmission.findMany({ orderBy: { nameEn: 'asc' } }),
-    prisma.driveType.findMany({ orderBy: { nameEn: 'asc' } }),
-    prisma.color.findMany({ orderBy: { nameEn: 'asc' } }),
-    prisma.vehicleCategory.findMany({ orderBy: { nameEn: 'asc' } }),
-    prisma.country.findMany({
-      orderBy: { nameEn: 'asc' },
-      include: { cities: { orderBy: { nameEn: 'asc' } } },
-    }),
-    prisma.model.findMany({
-      orderBy: { nameEn: 'asc' },
-      include: { manufacturer: true },
-    }),
-    prisma.listing.findMany({
-      select: { year: true },
-      distinct: ['year'],
-      orderBy: { year: 'desc' },
-    }),
-    prisma.listing.findMany({
-      select: { price: true },
-      distinct: ['price'],
-      orderBy: { price: 'asc' },
-      take: 30,
-    }),
-    prisma.feature.findMany({ orderBy: { nameEn: 'asc' } }),
-    prisma.sticker.findMany({ orderBy: { nameEn: 'asc' } }),
-  ]);
+function listingYears() {
+  const current = new Date().getFullYear();
+  return Array.from({ length: current - 1989 }, (_, i) => current - i);
+}
 
-  return NextResponse.json({
-    manufacturers,
-    bodyTypes,
-    fuelTypes,
-    transmissions,
-    driveTypes,
-    colors,
-    categories,
-    countries,
-    models,
-    years: years.map((y) => y.year),
-    prices: prices.map((p) => p.price),
-    features,
-    stickers,
-  });
+const EMPTY_FILTERS = {
+  manufacturers: [],
+  bodyTypes: [],
+  fuelTypes: [],
+  transmissions: [],
+  driveTypes: [],
+  colors: [],
+  categories: [],
+  countries: [],
+  models: [],
+  years: listingYears(),
+  prices: [] as unknown[],
+  features: [],
+  stickers: [],
+};
+
+export async function GET() {
+  try {
+    const [manufacturers, bodyTypes, fuelTypes, transmissions] = await Promise.all([
+      prisma.manufacturer.findMany({
+        orderBy: { nameEn: 'asc' },
+        include: { models: { orderBy: { nameEn: 'asc' } } },
+      }),
+      prisma.bodyType.findMany({ orderBy: { nameEn: 'asc' } }),
+      prisma.fuelType.findMany({ orderBy: { nameEn: 'asc' } }),
+      prisma.transmission.findMany({ orderBy: { nameEn: 'asc' } }),
+    ]);
+
+    const [driveTypes, colors, categories, countries] = await Promise.all([
+      prisma.driveType.findMany({ orderBy: { nameEn: 'asc' } }),
+      prisma.color.findMany({ orderBy: { nameEn: 'asc' } }),
+      prisma.vehicleCategory.findMany({ orderBy: { nameEn: 'asc' } }),
+      prisma.country.findMany({
+        orderBy: { nameEn: 'asc' },
+        include: { cities: { orderBy: { nameEn: 'asc' } } },
+      }),
+    ]);
+
+    const [models, features, stickers] = await Promise.all([
+      prisma.model.findMany({
+        orderBy: { nameEn: 'asc' },
+        select: { id: true, nameEn: true, nameRu: true, manufacturerId: true },
+      }),
+      prisma.feature.findMany({ orderBy: { nameEn: 'asc' } }),
+      prisma.sticker.findMany({ orderBy: { nameEn: 'asc' } }),
+    ]);
+
+    return NextResponse.json({
+      manufacturers,
+      bodyTypes,
+      fuelTypes,
+      transmissions,
+      driveTypes,
+      colors,
+      categories,
+      countries,
+      models,
+      years: listingYears(),
+      prices: [],
+      features,
+      stickers,
+    });
+  } catch (error) {
+    console.error('GET /api/filters failed:', error);
+    return NextResponse.json(EMPTY_FILTERS);
+  }
 }

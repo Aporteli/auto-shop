@@ -3,11 +3,13 @@ import { getSessionUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
 export async function GET() {
-  const user = await getSessionUser();
-  if (!user) {
-    return NextResponse.json({ user: null }, { status: 401 });
+  try {
+    const user = await getSessionUser();
+    return NextResponse.json({ user: user ?? null });
+  } catch (error) {
+    console.error('GET /api/auth/me failed:', error);
+    return NextResponse.json({ user: null });
   }
-  return NextResponse.json({ user });
 }
 
 export async function PATCH(request: Request) {

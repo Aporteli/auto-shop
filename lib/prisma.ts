@@ -15,7 +15,7 @@ function createPrismaClient() {
           user: process.env.DB_USER || "root",
           password: process.env.DB_PASSWORD || "",
           database: process.env.DB_NAME || "auto_shop_db",
-          connectionLimit: 5,
+          connectionLimit: 3,
         });
 
   return new PrismaClient({ adapter });

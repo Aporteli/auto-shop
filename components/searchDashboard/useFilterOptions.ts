@@ -24,6 +24,8 @@ export function useFilterOptions(setFiltersState: Dispatch<SetStateAction<Search
           if (carsId == null) return prev;
           return { ...prev, categoryId: carsId };
         });
+      } catch (error) {
+        console.error(error);
       } finally {
         if (mounted) setIsLoading(false);
       }
