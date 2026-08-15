@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
+import OptimizedImage from '@/components/OptimizedImage';
 import {
   blogCover,
   blogExcerpt,
@@ -40,7 +41,15 @@ export default function BlogListPage({ posts }: BlogListPageProps) {
             return (
               <article key={post.id} className={styles.card}>
                 <Link href={`/blog/${post.slug}`} className={styles.imageLink}>
-                  <img className={styles.image} src={blogCover(post)} alt={title} draggable={false} />
+                  <OptimizedImage
+                    className={styles.image}
+                    src={blogCover(post)}
+                    alt={title}
+                    variant="card"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    draggable={false}
+                  />
                 </Link>
                 <div className={styles.body}>
                   <div className={styles.meta}>

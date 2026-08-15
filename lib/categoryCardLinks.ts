@@ -4,7 +4,7 @@ import { buildListingSearchParams, defaultSearchFilters } from './searchParams';
 export type CategoryCardConfig = {
   slug: 'custom-vehicles' | 'motorcycles';
   localeKey: 'customVehicles' | 'motorcycles';
-  imageSeed: string;
+  imageUrl: string;
   /** Body type keys (English names), first half = column 1, second half = column 2 */
   bodyTypeKeys: string[];
 };
@@ -13,7 +13,7 @@ export const CATEGORY_CARDS: CategoryCardConfig[] = [
   {
     slug: 'custom-vehicles',
     localeKey: 'customVehicles',
-    imageSeed: 'autoshop-custom-vehicle',
+    imageUrl: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7',
     bodyTypeKeys: [
       'Semi-trailer truck',
       'Dump truck',
@@ -30,7 +30,7 @@ export const CATEGORY_CARDS: CategoryCardConfig[] = [
   {
     slug: 'motorcycles',
     localeKey: 'motorcycles',
-    imageSeed: 'autoshop-motorcycle',
+    imageUrl: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39',
     bodyTypeKeys: [
       'Motorcycle',
       'Quad bike',

@@ -62,6 +62,7 @@ export default function HeaderSearchPanel({
                   model={item.model.nameEn}
                   alt=""
                   draggable={false}
+                  sizes="52px"
                 />
                 <span className={styles.resultBody}>
                   <span className={styles.resultTitle}>

@@ -71,11 +71,13 @@
 }
 
 .recentImage {
+  position: relative;
   width: 96px;
   height: 72px;
   object-fit: cover;
   border-radius: 0.75rem;
   display: block;
+  overflow: hidden;
 }
 
 .recentContent {
@@ -210,6 +212,7 @@
 }
 
 .dealerBadgeImage {
+  position: relative;
   overflow: hidden;
   background: #f3f4f6;
 }

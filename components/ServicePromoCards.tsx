@@ -1,6 +1,8 @@
 'use client';
 
 import { useLanguage } from '@/contexts/LanguageContext';
+import OptimizedImage from '@/components/OptimizedImage';
+import { CATEGORY_UNSPLASH_IMAGES } from '@/lib/carImage';
 import styles from './ServicePromoCards.module.css';
 
 export default function ServicePromoCards() {
@@ -51,10 +53,15 @@ export default function ServicePromoCards() {
             </button>
           </div>
 
-          <img
+          <OptimizedImage
             className={styles.carImage}
-            src="https://picsum.photos/seed/autoshop-inspection-car/640/360"
+            src={CATEGORY_UNSPLASH_IMAGES.inspection}
             alt={t.servicePromo.inspection.imageAlt}
+            variant="card"
+            width={600}
+            height={400}
+            sizes="220px"
+            fit="contain"
             draggable={false}
           />
         </div>

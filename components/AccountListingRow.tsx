@@ -47,6 +47,7 @@ export default function AccountListingRow({
           make={listing.manufacturerEn}
           model={listing.modelEn}
           alt=""
+          sizes="88px"
         />
         <div className={styles.meta}>
           <p className={styles.rowTitle}>{title}</p>

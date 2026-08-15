@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
+import OptimizedImage from '@/components/OptimizedImage';
 import {
   blogContent,
   blogCover,
@@ -37,7 +38,16 @@ export default function BlogPostPage({ post }: BlogPostPageProps) {
         <h1 className={styles.title}>{title}</h1>
       </header>
 
-      <img className={styles.cover} src={blogCover(post)} alt={title} draggable={false} />
+      <OptimizedImage
+        className={styles.cover}
+        src={blogCover(post)}
+        alt={title}
+        variant="hero"
+        fill
+        sizes="(max-width: 768px) 100vw, 760px"
+        priority
+        draggable={false}
+      />
 
       <div
         className={styles.content}

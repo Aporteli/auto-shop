@@ -116,6 +116,8 @@
   border-radius: 0.55rem;
   background: #e5e7eb;
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .meta {
@@ -234,11 +236,13 @@
 }
 
 .newsThumb {
+  position: relative;
   width: 8rem;
   height: 5.5rem;
   object-fit: cover;
   border-radius: 0.55rem;
   background: #e5e7eb;
+  overflow: hidden;
 }
 
 @media (max-width: 720px) {

@@ -1,3 +1,5 @@
+import { genericCarPhotoUrls, isPlaceholderImageUrl } from '@/lib/carImage';
+
 export type BlogPostRecord = {
   id: number;
   slug: string;
@@ -8,7 +10,7 @@ export type BlogPostRecord = {
   contentEn: string;
   contentRu: string;
   coverImage: string | null;
-  publishedAt: Date | null;
+  publishedAt: Date | string | null;
 };
 
 export function blogTitle(post: BlogPostRecord, language: string) {
@@ -24,12 +26,17 @@ export function blogContent(post: BlogPostRecord, language: string) {
 }
 
 export function blogCover(post: BlogPostRecord) {
-  return post.coverImage ?? `https://picsum.photos/seed/blog-${post.slug}/1200/630`;
+  if (post.coverImage && !isPlaceholderImageUrl(post.coverImage)) {
+    return post.coverImage;
+  }
+  return genericCarPhotoUrls('blog', post.slug)[0];
 }
 
-export function formatBlogDate(date: Date | null | undefined, language: string) {
+export function formatBlogDate(date: Date | string | null | undefined, language: string) {
   if (!date) return '';
-  return date.toLocaleDateString(language === 'ru' ? 'ru-RU' : 'en-US', {
+  const value = date instanceof Date ? date : new Date(date);
+  if (Number.isNaN(value.getTime())) return '';
+  return value.toLocaleDateString(language === 'ru' ? 'ru-RU' : 'en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

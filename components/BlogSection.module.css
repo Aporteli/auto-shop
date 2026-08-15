@@ -45,11 +45,13 @@
 }
 
 .featuredImage {
+  position: relative;
   width: 224px;
   height: 168px;
   object-fit: cover;
   border-radius: 0.9rem;
   display: block;
+  overflow: hidden;
 }
 
 .featuredImageLink,
@@ -111,11 +113,13 @@
 }
 
 .sideImage {
+  position: relative;
   width: 104px;
   height: 78px;
   object-fit: cover;
   border-radius: 0.8rem;
   display: block;
+  overflow: hidden;
 }
 
 .sideContent {

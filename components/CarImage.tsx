@@ -1,7 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { CAR_PLACEHOLDER_SRC, carImageCacheKey, isPlaceholderImageUrl } from '@/lib/carImage';
+import OptimizedImage from '@/components/OptimizedImage';
+import {
+  CAR_PLACEHOLDER_SRC,
+  carImageCacheKey,
+  isPlaceholderImageUrl,
+  type UnsplashImageVariant,
+} from '@/lib/carImage';
 
 type CarImageProps = {
   make?: string | null;
@@ -11,6 +17,10 @@ type CarImageProps = {
   className?: string;
   photoIndex?: number;
   draggable?: boolean;
+  variant?: UnsplashImageVariant;
+  sizes?: string;
+  fill?: boolean;
+  priority?: boolean;
 };
 
 const inflight = new Map<string, Promise<string[]>>();
@@ -44,6 +54,10 @@ export default function CarImage({
   className,
   photoIndex = 0,
   draggable = false,
+  variant = 'card',
+  sizes,
+  fill = true,
+  priority = false,
 }: CarImageProps) {
   const uploadedSrc = src && !isPlaceholderImageUrl(src) ? src : null;
   const [remoteUrl, setRemoteUrl] = useState<string | null>(null);
@@ -68,12 +82,15 @@ export default function CarImage({
   const displayUrl = failedUrl === url ? CAR_PLACEHOLDER_SRC : url;
 
   return (
-    <img
-      className={className}
+    <OptimizedImage
       src={displayUrl}
       alt={alt}
+      className={className}
+      variant={variant}
+      sizes={sizes}
+      fill={fill}
+      priority={priority}
       draggable={draggable}
-      onDragStart={draggable ? undefined : (event) => event.preventDefault()}
       onError={() => setFailedUrl(url)}
     />
   );

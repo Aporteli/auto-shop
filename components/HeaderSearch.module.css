@@ -123,12 +123,14 @@
 }
 
 .resultImage {
+  position: relative;
   width: 3.25rem;
   height: 2.4rem;
   object-fit: cover;
   border-radius: 0.4rem;
   background: #f3f4f6;
   flex-shrink: 0;
+  overflow: hidden;
 }
 
 .resultBody {

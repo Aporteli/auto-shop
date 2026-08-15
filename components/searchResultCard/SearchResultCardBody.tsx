@@ -73,6 +73,7 @@ export default function SearchResultCardBody({
               alt={title}
               photoIndex={activeImageIndex}
               draggable={false}
+              sizes="(max-width: 768px) 100vw, 220px"
             />
           </Link>
 

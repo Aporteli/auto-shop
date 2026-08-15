@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import OptimizedImage from '@/components/OptimizedImage';
 import styles from '../DealersPage.module.css';
 import type { DealerCardData } from './types';
 
@@ -44,7 +45,7 @@ export default function DealerCard({
       <div className={styles.cardTop}>
         <div className={styles.logoWrap}>
           {dealer.logo ? (
-            <img className={styles.logo} src={dealer.logo} alt="" draggable={false} />
+            <OptimizedImage className={styles.logo} src={dealer.logo} alt="" fill sizes="72px" draggable={false} />
           ) : (
             <div className={styles.logoFallback} aria-hidden="true">
               {name.slice(0, 1).toUpperCase()}

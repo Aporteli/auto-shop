@@ -46,6 +46,9 @@ export default function ListingGallery({
           alt={alt}
           photoIndex={activeImage}
           draggable={false}
+          variant="hero"
+          sizes="(max-width: 1024px) 100vw, 760px"
+          priority
         />
         {images.length > 1 && (
           <>
@@ -80,6 +83,7 @@ export default function ListingGallery({
                 alt=""
                 photoIndex={index}
                 draggable={false}
+                sizes="86px"
               />
             </button>
           ))}

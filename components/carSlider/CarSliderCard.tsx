@@ -26,6 +26,7 @@ export default function CarSliderCard({ item, cardRef, cardWidth, didDragRef }: 
           model={item.modelName}
           alt={item.model}
           draggable={false}
+          sizes="280px"
         />
       </div>
 

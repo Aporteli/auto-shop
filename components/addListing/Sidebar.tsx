@@ -1,4 +1,5 @@
 import type { AddListingCopy, SectionKey } from './types';
+import OptimizedImage from '@/components/OptimizedImage';
 import styles from '../AddListingForm.module.css';
 
 type Step = { key: SectionKey; label: string; done: boolean };
@@ -54,8 +55,7 @@ export default function AddListingSidebar({
       <div className={styles.previewCard}>
         <div className={styles.previewImage}>
           {previewImage ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={previewImage} alt="" />
+            <OptimizedImage src={previewImage} alt="" width={280} height={160} sizes="240px" />
           ) : (
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9ca3af">
               <path

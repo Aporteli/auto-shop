@@ -72,6 +72,7 @@ export default function MarketplaceOverview({
                       model={listing.model.nameEn}
                       alt={title}
                       draggable={false}
+                      sizes="96px"
                     />
                   </Link>
 

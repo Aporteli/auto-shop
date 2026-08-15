@@ -90,6 +90,7 @@
 }
 
 .thumb {
+  position: relative;
   flex-shrink: 0;
   width: 5.4rem;
   height: 3.6rem;

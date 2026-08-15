@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
+import { unstable_cache } from 'next/cache';
 import { prisma } from '@/lib/prisma';
+
+export const revalidate = 3600;
 
 function listingYears() {
   const current = new Date().getFullYear();
@@ -22,8 +25,8 @@ const EMPTY_FILTERS = {
   stickers: [],
 };
 
-export async function GET() {
-  try {
+const getFilterAttributes = unstable_cache(
+  async () => {
     const [manufacturers, bodyTypes, fuelTypes, transmissions] = await Promise.all([
       prisma.manufacturer.findMany({
         orderBy: { nameEn: 'asc' },
@@ -53,7 +56,7 @@ export async function GET() {
       prisma.sticker.findMany({ orderBy: { nameEn: 'asc' } }),
     ]);
 
-    return NextResponse.json({
+    return {
       manufacturers,
       bodyTypes,
       fuelTypes,
@@ -64,9 +67,20 @@ export async function GET() {
       countries,
       models,
       years: listingYears(),
-      prices: [],
+      prices: [] as unknown[],
       features,
       stickers,
+    };
+  },
+  ['filter-attributes'],
+  { revalidate: 3600 },
+);
+
+export async function GET() {
+  try {
+    const data = await getFilterAttributes();
+    return NextResponse.json(data, {
+      headers: { 'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400' },
     });
   } catch (error) {
     console.error('GET /api/filters failed:', error);

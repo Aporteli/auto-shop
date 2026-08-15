@@ -115,6 +115,7 @@
 }
 
 .imageWrap {
+  position: relative;
   height: 130px;
   width: 100%;
   overflow: hidden;

@@ -46,13 +46,16 @@
 }
 
 .imageLink {
+  position: relative;
   display: block;
+  height: 220px;
+  overflow: hidden;
   text-decoration: none;
 }
 
 .image {
   width: 100%;
-  height: 220px;
+  height: 100%;
   object-fit: cover;
   display: block;
 }

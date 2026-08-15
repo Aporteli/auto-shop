@@ -9,6 +9,7 @@ import {
   labelForCategoryBodyType,
   splitCategoryCardColumns,
 } from '@/lib/categoryCardLinks';
+import OptimizedImage from '@/components/OptimizedImage';
 import styles from './CategoryCards.module.css';
 
 type FilterOption = { id: number; nameEn: string; nameRu: string; slug?: string };
@@ -99,10 +100,15 @@ export default function CategoryCards() {
             </Link>
           </div>
           <Link href={card.seeAllHref} className={styles.imageWrap} aria-label={card.title}>
-            <img
+            <OptimizedImage
               className={styles.image}
-              src={`https://picsum.photos/seed/${card.imageSeed}/480/400`}
+              src={card.imageUrl}
               alt={card.imageAlt}
+              variant="card"
+              width={600}
+              height={400}
+              sizes="200px"
+              fit="contain"
               draggable={false}
             />
           </Link>

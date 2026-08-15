@@ -1,5 +1,6 @@
 'use client';
 
+import OptimizedImage from '@/components/OptimizedImage';
 import styles from '../CataloguePage.module.css';
 import { brandAccent, brandInitial, INITIAL_BRAND_ROWS, type Brand } from './types';
 
@@ -59,7 +60,7 @@ export default function CatalogueBrandsSection({
             <button key={brand.id} type="button" className={styles.logoCard} onClick={() => openBrand(brand)}>
               {brand.logo ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={brand.logo} alt={name} />
+                <OptimizedImage src={brand.logo} alt={name} width={54} height={54} sizes="54px" fit="contain" />
               ) : (
                 <span className={styles.monogram} style={{ background: `hsl(${brandAccent(brand.nameEn)} 72% 46%)` }}>
                   {brandInitial(brand.nameEn)}

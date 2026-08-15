@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { carImageCacheKey, carImageQuery, genericCarPhotoUrls } from '@/lib/carImage';
+import { unstable_cache } from 'next/cache';
+import { carImageCacheKey, carImageQuery, genericCarPhotoUrls, optimizeUnsplashUrl } from '@/lib/carImage';
+
+export const revalidate = 86400;
 
 type UnsplashSearchResponse = {
   results?: Array<{
@@ -30,33 +33,49 @@ async function searchUnsplash(query: string, accessKey: string) {
     .filter((photoUrl): photoUrl is string => Boolean(photoUrl));
 }
 
+const getUnsplashUrls = unstable_cache(
+  async (query: string) => {
+    const accessKey = process.env.UNSPLASH_ACCESS_KEY?.trim();
+    if (!accessKey) return [] as string[];
+    return searchUnsplash(query, accessKey);
+  },
+  ['unsplash-search'],
+  { revalidate: 86400 },
+);
+
+function sizedUrls(urls: string[]) {
+  return urls.map((url) => optimizeUnsplashUrl(url, 'card'));
+}
+
 export async function GET(request: NextRequest) {
   const make = request.nextUrl.searchParams.get('make')?.trim() || '';
   const model = request.nextUrl.searchParams.get('model')?.trim() || '';
   const cacheKey = carImageCacheKey(make, model);
   const cached = memoryCache.get(cacheKey);
   if (cached && cached.expiresAt > Date.now()) {
-    return NextResponse.json({ urls: cached.urls, query: carImageQuery(make, model) });
+    return NextResponse.json(
+      { urls: cached.urls, query: carImageQuery(make, model) },
+      { headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800' } },
+    );
   }
 
-  const accessKey = process.env.UNSPLASH_ACCESS_KEY?.trim();
   let urls: string[] = [];
-
-  if (accessKey) {
-    const primary = carImageQuery(make, model);
-    urls = await searchUnsplash(primary, accessKey);
-    if (urls.length === 0 && make && model) {
-      urls = await searchUnsplash(`${make} car`, accessKey);
-    }
-    if (urls.length === 0) {
-      urls = await searchUnsplash('car', accessKey);
-    }
+  const primary = carImageQuery(make, model);
+  urls = await getUnsplashUrls(primary);
+  if (urls.length === 0 && make && model) {
+    urls = await getUnsplashUrls(`${make} car`);
   }
-
+  if (urls.length === 0) {
+    urls = await getUnsplashUrls('car');
+  }
   if (urls.length === 0) {
     urls = genericCarPhotoUrls(make, model);
   }
 
+  urls = sizedUrls(urls);
   memoryCache.set(cacheKey, { urls, expiresAt: Date.now() + CACHE_MS });
-  return NextResponse.json({ urls, query: carImageQuery(make, model) });
+  return NextResponse.json(
+    { urls, query: primary },
+    { headers: { 'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800' } },
+  );
 }

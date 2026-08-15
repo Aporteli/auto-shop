@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
+import OptimizedImage from '@/components/OptimizedImage';
 import {
   blogCover,
   blogExcerpt,
@@ -36,10 +37,13 @@ export default function BlogSection({ posts }: BlogSectionProps) {
       <div className={styles.grid}>
         <article className={styles.featuredCard}>
           <Link href={`/blog/${featuredPost.slug}`} className={styles.featuredImageLink}>
-            <img
+            <OptimizedImage
               className={styles.featuredImage}
               src={blogCover(featuredPost)}
               alt={blogTitle(featuredPost, language)}
+              variant="card"
+              fill
+              sizes="224px"
               draggable={false}
             />
           </Link>
@@ -57,10 +61,13 @@ export default function BlogSection({ posts }: BlogSectionProps) {
           {sidePosts.map((post) => (
             <article key={post.id} className={styles.sideCard}>
               <Link href={`/blog/${post.slug}`} className={styles.sideImageLink}>
-                <img
+                <OptimizedImage
                   className={styles.sideImage}
                   src={blogCover(post)}
                   alt={blogTitle(post, language)}
+                  variant="card"
+                  fill
+                  sizes="104px"
                   draggable={false}
                 />
               </Link>

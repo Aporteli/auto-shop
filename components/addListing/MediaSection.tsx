@@ -1,5 +1,6 @@
 import type { AddListingCopy, FormUpdate } from './types';
 import type { AddListingFormState } from '@/lib/addListing';
+import OptimizedImage from '@/components/OptimizedImage';
 import SectionCard from './SectionCard';
 import styles from '../AddListingForm.module.css';
 
@@ -61,8 +62,7 @@ export default function MediaSection({
           <div className={styles.photoGrid}>
             {form.imageUrls.map((url, index) => (
               <div key={url} className={styles.photoThumb}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={url} alt="" />
+                <OptimizedImage src={url} alt="" width={160} height={120} sizes="120px" />
                 <button
                   type="button"
                   className={styles.photoRemove}

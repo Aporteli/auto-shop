@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import OptimizedImage from '@/components/OptimizedImage';
 import type { MarketplaceDealerItem } from './MarketplaceOverview';
 import styles from './MarketplaceOverview.module.css';
 
@@ -24,7 +25,7 @@ function DealerBadge({
   if (logo) {
     return (
       <span className={`${styles.dealerBadge} ${styles.dealerBadgeImage}`}>
-        <img src={logo} alt="" draggable={false} />
+        <OptimizedImage src={logo} alt="" fill sizes="32px" draggable={false} />
       </span>
     );
   }
