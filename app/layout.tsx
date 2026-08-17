@@ -20,6 +20,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Auto Shop",
   description: "Auto Shop",
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: "/apple-icon.svg",
+  },
 };
 
 export const dynamic = "force-dynamic";
